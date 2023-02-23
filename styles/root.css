@@ -1,10 +1,10 @@
-@import url('./styles/panels/panel-cards/index.css');
-@import url('./styles/panels/panel-search/index.css');
-@import url('./styles/panels/panel-title/index.css');
+@import url('./panels/panel-cards/index.css');
+@import url('./panels/panel-search/index.css');
+@import url('./panels/panel-title/index.css');
 
-@import url('./styles/popups/index.css');
+@import url('./popups/index.css');
 
-@import url('./styles/fonts/index.css');
+@import url('./fonts/index.css');
 
 :root {
   --primary-width-btn: 30px;
@@ -17,7 +17,7 @@
 }
 
 html {
-  overflow-y: hidden;
+  overflow-y: auto;
   /* margin-left: calc((100vw - 100%));
   margin-right: 0; */
 }

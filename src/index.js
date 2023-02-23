@@ -1,3 +1,6 @@
+import '../styles/root.css';
+
+
 const btnAddNewCard = document.querySelector('.btn-add-new-card');
 
 const listCards = document.querySelector('.list-cards');
