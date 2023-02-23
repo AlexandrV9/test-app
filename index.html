@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test-app</title>
+  <link rel="stylesheet" href="./root.css">
+  <!-- <script src="./scripts/index.js" defer></script> -->
+  <script src="./scripts/index.js" defer></script>
+</head>
+<body>
+   <div class="app">
+      <div class="panel-title">
+         <h1>#TestApp#</h1>
+      </div>
+      <div class="panel-filter"></div>
+      <div class="panel-search">
+         <div class="content">
+            <form class="form-search">
+            <input 
+               type="text" 
+               id="form-search-input"
+            />
+            <button class="form-search-btn">
+               <img 
+                  src="./assets/icons/search.svg" alt="icon-search"
+               >
+            </button>
+         </form>
+
+         <button class="btn-add-new-card">Создать новую карточку</button>
+         </div>
+         
+
+      </div>
+
+      <div class="panel-cards">
+         <ul class="list-cards"></ul>
+      </div>
+
+      
+   </div>
+
+   <div class="popup-create-card">
+      <form class="form form-create-card">
+        <h3>Создать новую карточку</h3>
+         <div class="field-input">
+            <label for="title">Title</label>
+            <input type="text" id="title" />
+         </div>
+        <div class="field-input">
+            <label for="author">Author</label>
+            <input type="text" id="author" />
+        </div>
+        <div class="field-input">
+            <label for="urlImg">Url img</label>
+            <input type="url" id="urlImg" />
+        </div>
+        <button id="btn-send">
+          Отправить
+        </button>
+        <button id="btn-close">
+            <img src="./assets/icons/close.svg" alt="icon-close">
+        </button>
+      </form>
+    </div>
+
+   <template id="tmpl-new-card">
+
+      <li class="card">
+         <div class="top-card-panel">
+            <button class="btn-card btn-delete">
+               <img src="./assets/icons/trash.svg" alt="icon-delete">
+            </button>
+            <button class="btn-card btn-edite">
+               <img src="./assets/icons/pencil.svg" alt="icon-edite">
+            </button>
+            <button class="btn-card btn-add-favorites">
+               <img src="./assets/icons/favorites.svg" alt="icon-add-favorites">
+            </button>
+         </div>
+         <h3 class="card-title"></h3>
+         <p class="card-author"></p>
+         <img class="card-img" src="" alt="">
+         <div class="bottom-card-panel">
+            <div class="like">
+               <span class="value">0</span>
+               <button class="btn-card btn-like">
+                  <img src="./assets/icons/like.svg" alt="icon-like">
+               </button>
+            </div>
+            <div class="dislike">
+               <span class="value">0</span>
+               <button class="btn-card btn-dislike">
+                  <img src="./assets/icons/dislike.svg" alt="icon-dislike">
+               </button>
+            </div>
+            <p class="card-txt-data"></p>
+         </div>
+       </li>
+
+   </template>
+</body>
+</html>

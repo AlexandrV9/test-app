@@ -1,0 +1,9 @@
+.panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-title h1 {
+  color: white;
+}
