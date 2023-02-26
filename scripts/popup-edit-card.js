@@ -18,10 +18,9 @@ const editCard = () => {
   const card = cards.find(card => card.id === currentCard.id);
 
   correctSaveValue(currentCard, inputs, "textContent", "title",);
-  correctSaveValue(currentCard, inputs, "src", "img");
-  correctSaveValue(card, inputs, "", "img");
+  correctSaveValue(currentCard.img, inputs, "", "", "urlImg", "src");
+  correctSaveValue(card, inputs, "", "urlImg");
   correctSaveValue(card, inputs, "", "title");
-  console.log(cards)
 
 }
 

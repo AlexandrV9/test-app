@@ -47,24 +47,30 @@ export const getElementsCard = (id) => {
 }
 export const correctSaveValue = (result, sourse, property = "", keyC = "", keyS = "", keyR = "") => {
 
+  // currentCard.img.src = inputs.urlImg;
   if (keyC && property) {
-    result[keyC][property] = sourse[keyC] ? sourse[keyC] : result[keyC][property]
+    result[keyC][property] = sourse[keyC] ? sourse[keyC] : result[keyC][property];
+    console.log('1')
   }
 
   if(keyC && !property) {
-    result[keyC] = sourse[keyC] ? sourse[keyC] : result[keyC]
+    result[keyC] = sourse[keyC] ? sourse[keyC] : result[keyC];
+    console.log('2')
   }
 
   if(keyR && keyS && property) {
-    result[keyR][property] = sourse[keyS] ? sourse[keyS] : result[keyR][property]
+    result[keyR][property] = sourse[keyS] ? sourse[keyS] : result[keyR][property];
+    console.log('3')
   }
 
   if(keyR && keyS && !property) {
-    result[keyR] = sourse[keyS] ? sourse[keyS] : result[keyR]
+    result[keyR] = sourse[keyS] ? sourse[keyS] : result[keyR];
+    console.log('4')
   }
 
   if(!keyR && keyS && property) {
-    result[property] = sourse[keyS] ? sourse[keyS] : result[property]
+    result[property] = sourse[keyS] ? sourse[keyS] : result[property];
+    console.log('5')
   }
 
 }
