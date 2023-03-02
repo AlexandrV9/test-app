@@ -1,37 +1,34 @@
-import { getElementsCard, correctSaveValue } from "../utils/helper";
+import { handleStopPropagation } from "../utils/helper";
 import { cards } from "../src/index";
 
 const editPopup = document.querySelector('.popup-edit-card');
 const contentPopup = editPopup.querySelector(".form-edit-card");
-
-const btnClose = editPopup.querySelector("#btn-close");
-const btnSave = editPopup.querySelector('#btn-save')
-
 const inputTitle = editPopup.querySelector("#title");
 const inputUrlImg = editPopup.querySelector("#urlImg");
+const btnClose = editPopup.querySelector("#btn-close");
+const btnSave = editPopup.querySelector('#btn-save');
 
-const inputs = { title: "", urlImg: "" }
-let currentCard = "";
+const inputs = { title: "", src: "" }
+let currentElementsCard = "";
 let open = false;
 
 const editCard = () => {
-  const card = cards.find(card => card.id === currentCard.id);
+  const { elImg, elTitle, elCard } = currentElementsCard;
+  const card = cards.find(card => card.id === elCard.id);
 
-  correctSaveValue(currentCard, inputs, "textContent", "title",);
-  correctSaveValue(currentCard.img, inputs, "", "", "urlImg", "src");
-  correctSaveValue(card, inputs, "", "urlImg");
-  correctSaveValue(card, inputs, "", "title");
-
+  elTitle.textContent = inputs.title;
+  elImg.src = inputs.src;
+  card.title = inputs.title;
+  card.src = inputs.src;
 }
 
-const openPopupEditCard = (id) => {
-  currentCard = getElementsCard(id);
+const openPopupEditCard = ({ elCard, elTitle, elImg }) => {
+  currentElementsCard = { elCard, elTitle, elImg };
 
-  inputs.title = currentCard["title"].textContent;
-  inputTitle.value = currentCard["title"].textContent;
-
-  inputs.urlImg = currentCard["img"].src;
-  inputUrlImg.value = currentCard["img"].src;
+  inputs.title = elTitle.textContent;
+  inputTitle.value = elTitle.textContent;
+  inputs.urlImg = elImg.src;
+  inputUrlImg.value = elImg.src;
 
   editPopup.classList.add("active");
   open = true
@@ -51,9 +48,9 @@ const handleSubmit = (event) => {
 const onChangeInput = (event, key) => { inputs[key] = event.target.value };
 
 inputTitle.addEventListener("input", (event) => onChangeInput(event, "title"));
-inputUrlImg.addEventListener("input", (event) => onChangeInput(event, "urlImg"));
+inputUrlImg.addEventListener("input", (event) => onChangeInput(event, "src"));
 
-contentPopup.addEventListener('click', (event) => { event.stopPropagation() })
+contentPopup.addEventListener('click', handleStopPropagation);
 btnClose.addEventListener('click', closePopupEditCard);
 btnSave.addEventListener('click', handleSubmit)
 

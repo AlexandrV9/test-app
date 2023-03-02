@@ -35,9 +35,8 @@
       <div class="panel-cards">
          <ul class="list-cards"></ul>
       </div>
-
-      
    </div>
+
 
    <div class="popup-create-card">
       <form class="form form-create-card">
@@ -59,11 +58,10 @@
         </button>
         <button id="btn-close" type="button">
          <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
-     </button>
+         </button>
       </form>
 
    </div>
-
    <div class="popup-edit-card">
       <form class="form form-edit-card">
          <h3>Введите новые данные</h3>
@@ -79,9 +77,21 @@
          <button id="btn-close" type="button">
             <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
          </form>
+         <button id="btn-close" type="button">
+            <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
+         </button>
+   </div>
+   <div class="popup-delete-card">
+      <div class="content">
+         <h3>Вы точно хотите удалить эту карточку?</h3>
+         <button id="btn-delete">Удалить</button>
+         <button id="btn-cancel">Отмена</button>
+         <button id="btn-close" type="button">
+            <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
+         </button>
+      </div>
    </div>
    
-
    <template id="tmpl-new-card">
       <li class="card">
          <div class="top-card-panel">
@@ -111,7 +121,7 @@
                   <img src="<%=require('../assets/icons/dislike.svg')%>" alt="icon-dislike">
                </button>
             </div>
-            <p class="card-txt-data"></p>
+            <p class="card-txt-date"></p>
          </div>
        </li>
    </template>
