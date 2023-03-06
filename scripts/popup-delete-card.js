@@ -1,5 +1,5 @@
 import { cards } from '../src/index';
-import { handleStopPropagation } from '../utils/helper'
+import { preventDefaults } from '../utils/helper'
 
 const deletePopup = document.querySelector('.popup-delete-card');
 const contentPopup = deletePopup.querySelector(".content");
@@ -38,7 +38,7 @@ const handleSubmit = (event) => {
   closePopupDeleteCard();
 }
 
-contentPopup.addEventListener('click', handleStopPropagation);
+contentPopup.addEventListener('click', preventDefaults);
 btnDelete.addEventListener('click', handleSubmit);
 btnClose.addEventListener('click', closePopupDeleteCard);
 deletePopup.addEventListener('click', closePopupDeleteCard);

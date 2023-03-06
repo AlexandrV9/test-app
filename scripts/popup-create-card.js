@@ -2,16 +2,18 @@ import { cards } from '../src/index.js';
 
 import { 
   handleGetCorrectDate, 
-  correctSaveValue, 
   getElementsNewCard,
   getRandomId,
   clearValueInputsInObj,
   onChangeInput,
-  handleStopPropagation
+  preventDefaults,
+  closePopupByKeyEsc,
+  isValidHttpUrl
 } from '../utils/helper';
 
 import { openPopupEditCard } from './popup-edit-card';
 import { openPopupDeleteCard } from './popup-delete-card';
+import { openPopupDragAndDropImg } from './popup-drag-and-drop-img';
 
 const listCards = document.querySelector('.list-cards');
 
@@ -23,15 +25,15 @@ const inputUrlImg = popupCreateCard.querySelector("#urlImg");
 const btnSend = popupCreateCard.querySelector("#btn-send");
 const btnClose = popupCreateCard.querySelector("#btn-close");
 
-let openModal = false;
+let open = false;
 const inputs = { title: "", author: "", src: "" }
 
 export const openPopupCreateCard = () => {
-  openModal = true;
+  open = true;
   popupCreateCard.classList.add('active');
 }
 const closePopupCreateCard = () => {
-  openModal = false;
+  open = false;
   popupCreateCard.classList.remove('active')
   
   clearValueInputsInObj(inputs);
@@ -40,12 +42,36 @@ const closePopupCreateCard = () => {
   inputAuthor.value = "";
   inputUrlImg.value = "";
 }
+const likes = (dataCard, el) => {
+  dataCard.likes += 1;
+  el.textContent = dataCard.likes;
+}
+const dislikes = (dataCard, el) => {
+  dataCard.dislikes += 1;
+  el.textContent = dataCard.dislikes;
+}
+
 export const handleCreateNewCard = () => {
 
+  const valid = isValidHttpUrl(inputs.src);
+  if(!valid) return null;
+
   const [date, resDate] = handleGetCorrectDate();
-  const dataCard = { ...inputs, date, resDate, id: getRandomId() };
+  const dataCard = { ...inputs, date, resDate, id: getRandomId(), likes: 0, dislikes: 0 };
   const elNewCard = getElementsNewCard();
-  const { elCard, elTitle, elAuthor, elDate, elImg, btnEdit, btnDelete } = elNewCard;
+  const { 
+    elCard, 
+    elTitle, 
+    elAuthor, 
+    elDate, 
+    elImg, 
+    btnEdit, 
+    btnDelete, 
+    btnLike, 
+    btnDislike,
+    elCountLike,
+    elCountDislike
+   } = elNewCard;
 
   elTitle.textContent = dataCard.title;
   elAuthor.textContent = dataCard.author;
@@ -54,35 +80,48 @@ export const handleCreateNewCard = () => {
   elCard.id = dataCard.id;
 
   btnEdit.addEventListener('click', () => { openPopupEditCard(elNewCard) })
+  // btnEdit.addEventListener('click', () => { openPopupDragAndDropImg(elNewCard) })
   btnDelete.addEventListener('click', () => { openPopupDeleteCard(elNewCard) })
+  btnLike.addEventListener('click', () => { likes(dataCard, elCountLike) })
+  btnDislike.addEventListener('click', () => { dislikes(dataCard, elCountDislike) })
+
 
   cards.push(dataCard);
 
   return elCard;
 }
+const handleAddNewCard = (card) => { listCards.prepend(card)}
 const handleSubmit = (event) => {
-  event.preventDefault()
-  const newCard = handleCreateNewCard()
-  handleAddNewCard(newCard);
+  preventDefaults(event)
+  const newCard = handleCreateNewCard();
+  if(newCard) {
+    handleAddNewCard(newCard);
+  }
+
   closePopupCreateCard();
 }
-const handleAddNewCard = (card) => { listCards.prepend(card)}
-const closePopupByKeyEsc = (event) => {
-  if(event.key === "Escape" && openModal) {
-    closePopupCreateCard();
-  }
-}
 
-// inputs
 inputTitle.addEventListener("input", (event) => onChangeInput(event, inputs, "title"));
 inputAuthor.addEventListener("input", (event) => onChangeInput(event, inputs, "author"));
 inputUrlImg.addEventListener("input", (event) => onChangeInput(event, inputs, "src"));
 
-// close popup
 popupCreateCard.addEventListener('click', closePopupCreateCard);
 btnClose.addEventListener("click", closePopupCreateCard);
-document.addEventListener('keyup', closePopupByKeyEsc);
+document.addEventListener('keyup', (event) => { closePopupByKeyEsc(event, closePopupCreateCard, open) });
 
-// create new card
-content.addEventListener('click', handleStopPropagation)
+content.addEventListener('click', preventDefaults)
 btnSend.addEventListener("click", handleSubmit);
+
+
+
+
+
+
+// КАРТОЧКА 1 пустая размекта ====> inputs (данные) =====> запис между тегами инфу из input-ов =====> btnEdit.addEvent(openPopupEditCard ===> данные КАРТОЧКА 1)
+//                                                                                                .openPopupDeleteCard
+
+// КАРТОЧКА 2 пустая размекта ====> inputs (данные) =====> запис между тегами инфу из input-ов =====> btnEdit.addEvent(openPopupEditCard ===> данные КАРТОЧКА 2)
+//                                                                                                .openPopupDeleteCard
+
+// КАРТОЧКА 3 пустая размекта ====> inputs (данные) =====> запис между тегами инфу из input-ов =====> btnEdit.addEvent(openPopupEditCard ===> данные КАРТОЧКА 3)
+//                                                                                                .openPopupDeleteCard

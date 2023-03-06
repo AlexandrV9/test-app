@@ -1,8 +1,8 @@
-import { handleStopPropagation } from "../utils/helper";
+import { preventDefaults } from "../utils/helper";
 import { cards } from "../src/index";
 
 const editPopup = document.querySelector('.popup-edit-card');
-const contentPopup = editPopup.querySelector(".form-edit-card");
+const contentPopup = editPopup.querySelector(".content");
 const inputTitle = editPopup.querySelector("#title");
 const inputUrlImg = editPopup.querySelector("#urlImg");
 const btnClose = editPopup.querySelector("#btn-close");
@@ -17,14 +17,14 @@ const editCard = () => {
   const card = cards.find(card => card.id === elCard.id);
 
   elTitle.textContent = inputs.title;
-  elImg.src = inputs.src;
+  elImg.src = inputs.src ? inputs.src : elImg.src;
   card.title = inputs.title;
   card.src = inputs.src;
 }
 
 const openPopupEditCard = ({ elCard, elTitle, elImg }) => {
   currentElementsCard = { elCard, elTitle, elImg };
-
+  
   inputs.title = elTitle.textContent;
   inputTitle.value = elTitle.textContent;
   inputs.urlImg = elImg.src;
@@ -50,7 +50,7 @@ const onChangeInput = (event, key) => { inputs[key] = event.target.value };
 inputTitle.addEventListener("input", (event) => onChangeInput(event, "title"));
 inputUrlImg.addEventListener("input", (event) => onChangeInput(event, "src"));
 
-contentPopup.addEventListener('click', handleStopPropagation);
+contentPopup.addEventListener('click', preventDefaults);
 btnClose.addEventListener('click', closePopupEditCard);
 btnSave.addEventListener('click', handleSubmit)
 

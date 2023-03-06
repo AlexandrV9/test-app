@@ -5,7 +5,10 @@ export const clearValueInputsInObj = (obj) => {
   Object.keys(obj).forEach(key => { obj[key] = ""})
 }
 export const onChangeInput = (event, obj, key) => { obj[key] = event.target.value };
-export const handleStopPropagation = (event) => { event.stopPropagation() };
+export const preventDefaults = (event) => { 
+  event.preventDefault()
+  event.stopPropagation() 
+};
 export const handleGetCorrectDate = () => {
   const data = Date.now();
   const currentDate = new Date(data);
@@ -54,4 +57,18 @@ export const getElementsNewCard = () => {
     btnDelete,
     btnAddFavorites
   }
+}
+export const closePopupByKeyEsc = (event, callback, open) => {
+    if(event.key === "Escape" && open) {
+      callback();
+    }
+}
+export const isValidHttpUrl = (string) => {
+  let url;
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;
+  }
+  return url.protocol === "http:" || url.protocol === "https:";
 }

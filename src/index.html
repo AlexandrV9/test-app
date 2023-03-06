@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,59 +33,105 @@
       </div>
 
       <div class="panel-cards">
-         <ul class="list-cards"></ul>
+         <ul class="list-cards">
+            <li class="card">
+               <div class="top-card-panel">
+                  <button class="btn-card btn-delete">
+                     <img src="<%=require('../assets/icons/trash.svg')%>" alt="icon-delete">
+                  </button>
+                  <button class="btn-card btn-edite">
+                     <img src="<%=require('../assets/icons/pencil.svg')%>" alt="icon-edite">
+                  </button>
+                  <button class="btn-card btn-add-favorites">
+                     <img src="<%=require('../assets/icons/favorites.svg')%>" alt="icon-add-favorites">
+                  </button>
+               </div>
+               <h3 class="card-title">Названиеточки</h3>
+               <p class="card-author">Майкл</p>
+               <img class="card-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="">
+               <div class="bottom-card-panel">
+                  <div class="like">
+                     <span class="value">0</span>
+                     <button class="btn-card btn-like">
+                        <img src="<%=require('../assets/icons/like.svg')%>" alt="icon-like">
+                     </button>
+                  </div>
+                  <div class="dislike">
+                     <span class="value">0</span>
+                     <button class="btn-card btn-dislike">
+                        <img src="<%=require('../assets/icons/dislike.svg')%>" alt="icon-dislike">
+                     </button>
+                  </div>
+                  <p class="card-txt-date"></p>
+               </div>
+             </li>
+         </ul>
       </div>
    </div>
 
 
-   <div class="popup-create-card">
-      <form class="form form-create-card">
-        <h3>Создать новую карточку</h3>
-         <div class="field-input">
-            <label for="title">Title</label>
-            <input type="text" id="title" />
-         </div>
-        <div class="field-input">
-            <label for="author">Author</label>
-            <input type="text" id="author" />
-        </div>
-        <div class="field-input">
-            <label for="urlImg">Url img</label>
-            <input type="url" id="urlImg" />
-        </div>
-        <button id="btn-send" type="submit">
-          Отправить
-        </button>
-        <button id="btn-close" type="button">
-         <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
-         </button>
-      </form>
-
+   <div class="popup popup-create-card">
+      <div class="content">
+         <form class="form form-create-card">
+            <h3>Создать новую карточку</h3>
+             <div class="field-input">
+                <label for="title">Title</label>
+                <input type="text" id="title" placeholder="Введите название карточки"/>
+             </div>
+            <div class="field-input">
+                <label for="author">Author</label>
+                <input type="text" id="author" placeholder="Введите автора карточки"/>
+            </div>
+            <div class="field-input">
+                <label for="urlImg">Url img</label>
+                <input type="url" id="urlImg" placeholder="Введите url картинки"/>
+            </div>
+            <button id="btn-send" type="submit">
+              Отправить
+            </button>
+            <button id="btn-close" type="button">
+             <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
+             </button>
+          </form>
+      </div>
    </div>
-   <div class="popup-edit-card">
-      <form class="form form-edit-card">
-         <h3>Введите новые данные</h3>
-         <div class="field-input">
-            <label for="title">Title</label>
-            <input type="text" id="title" />
-         </div>
-         <div class="field-input">
-            <label for="urlImg">Url img</label>
-            <input type="url" id="urlImg" />
-         </div>
-         <button id="btn-save" type="submit">Изменить</button>
-         <button id="btn-close" type="button">
-            <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
-         </form>
-         <button id="btn-close" type="button">
-            <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
-         </button>
+   <div class="popup popup-edit-card">
+      <div class="content">
+         <form class="form form-edit-card">
+            <h3>Введите новые данные</h3>
+            <div class="field-input">
+               <label for="title">Title</label>
+               <input type="text" id="title" />
+            </div>
+            <div class="field-input">
+               <label for="urlImg">Url img</label>
+               <input type="url" id="urlImg" />
+            </div>
+            <button id="btn-save" type="submit">Изменить</button>
+            <button id="btn-close" type="button">
+               <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
+            </form>
+      </div>
    </div>
-   <div class="popup-delete-card">
+   <div class="popup popup-delete-card">
       <div class="content">
          <h3>Вы точно хотите удалить эту карточку?</h3>
          <button id="btn-delete">Удалить</button>
          <button id="btn-cancel">Отмена</button>
+         <button id="btn-close" type="button">
+            <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
+         </button>
+      </div>
+   </div>
+   <div class="popup popup-drag-and-drop-img">
+      <div class="content">
+         <h3>Перетащите картинку</h3>
+         <form class="drop-area">
+            <p>Перетащите сюда файл картинки</p>
+            <span>или</span>
+            <input type="file" id="file"/>
+            <label for="file">выбрать картинку</label>
+         </form>
          <button id="btn-close" type="button">
             <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
          </button>
