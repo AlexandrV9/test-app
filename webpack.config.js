@@ -32,7 +32,7 @@ module.exports = {
     static: path.resolve(__dirname, './src/index.js'),
     hot: true,
     compress: true,
-    port: 8081,
+    port: 8080,
     open: true
   },
   plugins: [

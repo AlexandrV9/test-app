@@ -2,9 +2,8 @@ export const getRandomId = () => {
   return Math.floor(Math.random() * Date.now()).toString(16);
 }
 export const clearValueInputsInObj = (obj) => {
-  Object.keys(obj).forEach(key => { obj[key] = ""})
+  Object.keys(obj).forEach(key => { obj[key].value = ""})
 }
-export const onChangeInput = (event, obj, key) => { obj[key] = event.target.value };
 export const preventDefaults = (event) => { 
   event.preventDefault()
   event.stopPropagation() 
@@ -63,12 +62,37 @@ export const closePopupByKeyEsc = (event, callback, open) => {
       callback();
     }
 }
-export const isValidHttpUrl = (string) => {
+export const isValidHttpUrl = (string, key) => {
   let url;
   try {
     url = new URL(string);
   } catch (_) {
-    return false;
+    return {
+      valid: false,
+      message: "Неправильная ссылка на картинку"
+    };
   }
-  return url.protocol === "http:" || url.protocol === "https:";
+  if(url.protocol === "http:" || url.protocol === "https:") {
+    return {
+      valid: true,
+      message: ""
+    }
+  } else {
+    return {
+      valid: false,
+      message: "Неправильная ссылка на картинку"
+    };
+  }
 }
+
+export const getFieldInputs = (inputs, field) => {
+  const resObj = {};
+  Object.keys(inputs).forEach(key => { 
+    resObj[key] = inputs[key][field];
+  });
+  return resObj;
+}
+
+export const onInput = (event, obj, key) => { 
+  obj[key].value = event.target.value;
+};

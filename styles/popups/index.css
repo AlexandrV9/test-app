@@ -23,6 +23,29 @@
   z-index: 2;
 }
 
+.popup form .field-input {
+  position: relative;
+}
+
+
+.popup form .field-input label {
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.popup form .field-input .error {
+  position: absolute;
+  bottom: -20px;
+  right: 5px;
+  color: red;
+  font-size: 12px;
+}
+
+
+
+
+
 .popup .content {
   width: 100%;
   max-width: 350px;
@@ -44,7 +67,7 @@
 }
 
 .popup input {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .popup #btn-close {

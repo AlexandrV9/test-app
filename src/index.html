@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>test-app</title>
+  <link rel="shortcut icon" href="#">
 </head>
 <body>
    <div class="app">
@@ -77,17 +78,20 @@
              <div class="field-input">
                 <label for="title">Title</label>
                 <input type="text" id="title" placeholder="Введите название карточки"/>
+                <span class="error error-title"></span>
              </div>
             <div class="field-input">
                 <label for="author">Author</label>
                 <input type="text" id="author" placeholder="Введите автора карточки"/>
+                <span class="error error-author"></span>
             </div>
             <div class="field-input">
-                <label for="urlImg">Url img</label>
+                <label for="#urlImg">Url img</label>
                 <input type="url" id="urlImg" placeholder="Введите url картинки"/>
+                <span class="error error-urlImg"></span>
             </div>
             <button id="btn-send" type="submit">
-              Отправить
+              Создать
             </button>
             <button id="btn-close" type="button">
              <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">

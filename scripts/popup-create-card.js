@@ -5,10 +5,11 @@ import {
   getElementsNewCard,
   getRandomId,
   clearValueInputsInObj,
-  onChangeInput,
+  onInput,
   preventDefaults,
   closePopupByKeyEsc,
-  isValidHttpUrl
+  isValidHttpUrl,
+  getFieldInputs,
 } from '../utils/helper';
 
 import { openPopupEditCard } from './popup-edit-card';
@@ -21,12 +22,30 @@ const popupCreateCard = document.querySelector(".popup-create-card");
 const content = popupCreateCard.querySelector(".form-create-card");
 const inputTitle = popupCreateCard.querySelector("#title");
 const inputAuthor = popupCreateCard.querySelector("#author");
-const inputUrlImg = popupCreateCard.querySelector("#urlImg");
+const inputUrl = popupCreateCard.querySelector("#urlImg");
 const btnSend = popupCreateCard.querySelector("#btn-send");
 const btnClose = popupCreateCard.querySelector("#btn-close");
+const errorTitle = popupCreateCard.querySelector(".error-title");
+const errorAuthor = popupCreateCard.querySelector(".error-author");
+const errorUrl = popupCreateCard.querySelector(".error-urlImg");
+
 
 let open = false;
-const inputs = { title: "", author: "", src: "" }
+
+const inputs = {
+  title: {
+    value: "",
+    valid: false
+  }, 
+  author: {
+    value: "",
+    valid: false
+  }, 
+  src: {
+    value: "",
+    valid: false
+  } 
+}
 
 export const openPopupCreateCard = () => {
   open = true;
@@ -40,7 +59,7 @@ const closePopupCreateCard = () => {
   
   inputTitle.value = "";
   inputAuthor.value = "";
-  inputUrlImg.value = "";
+  inputUrl.value = "";
 }
 const likes = (dataCard, el) => {
   dataCard.likes += 1;
@@ -50,15 +69,39 @@ const dislikes = (dataCard, el) => {
   dataCard.dislikes += 1;
   el.textContent = dataCard.dislikes;
 }
+const isValidText = (value, key) => {
+  if (!value) {
+    return {
+      valid: false,
+      message: `Поле ${key} обязательное`
+    }
+  } 
+  if (value.length < 2) {
+    return {
+      valid: false,
+      message: `Поле ${key} слишком короткое`
+    }
+  }
+  if(value.length > 20) {
+    return {
+      valid: false,
+      message: `Поле ${key} слишком длинное`
+    }
+  }
+  return {
+    valid: true,
+    message: ""
+  }
+}
+
 
 export const handleCreateNewCard = () => {
 
-  const valid = isValidHttpUrl(inputs.src);
-  if(!valid) return null;
-
   const [date, resDate] = handleGetCorrectDate();
-  const dataCard = { ...inputs, date, resDate, id: getRandomId(), likes: 0, dislikes: 0 };
   const elNewCard = getElementsNewCard();
+  const valueInputs = getFieldInputs(inputs, "value");
+
+  const dataCard = { ...valueInputs, date, resDate, id: getRandomId(), likes: 0, dislikes: 0 };
   const { 
     elCard, 
     elTitle, 
@@ -85,25 +128,50 @@ export const handleCreateNewCard = () => {
   btnLike.addEventListener('click', () => { likes(dataCard, elCountLike) })
   btnDislike.addEventListener('click', () => { dislikes(dataCard, elCountDislike) })
 
-
   cards.push(dataCard);
 
   return elCard;
 }
-const handleAddNewCard = (card) => { listCards.prepend(card)}
-const handleSubmit = (event) => {
-  preventDefaults(event)
-  const newCard = handleCreateNewCard();
-  if(newCard) {
-    handleAddNewCard(newCard);
-  }
 
-  closePopupCreateCard();
+function validForm(inputs) {
+  onValid(inputs, "title", isValidText, errorTitle);
+  onValid(inputs, "author", isValidText, errorAuthor);
+  onValid(inputs, "src", isValidHttpUrl, errorUrl);
+
+  const validInputs = getFieldInputs(inputs, "valid");
+  return !Object.values(validInputs).includes(false);
 }
 
-inputTitle.addEventListener("input", (event) => onChangeInput(event, inputs, "title"));
-inputAuthor.addEventListener("input", (event) => onChangeInput(event, inputs, "author"));
-inputUrlImg.addEventListener("input", (event) => onChangeInput(event, inputs, "src"));
+const handleAddNewCard = (card) => { listCards.prepend(card)}
+const handleSubmit = (event) => {
+  preventDefaults(event);
+  if(validForm(inputs)) {
+    const newCard = handleCreateNewCard();
+    handleAddNewCard(newCard);
+    closePopupCreateCard();
+  }
+}
+
+const onValid = (obj, key, funValid, elError) => {
+  const { valid, message } = funValid(obj[key].value, key);
+  elError.textContent = message;
+  obj[key].valid = valid;
+
+  if(!valid) {
+    elError.classList.add("active");
+  } else {
+    elError.classList.remove("active");
+  }
+}
+
+inputTitle.addEventListener("input", (event) => onInput(event, inputs, "title"));
+inputAuthor.addEventListener("input", (event) => onInput(event, inputs, "author"));
+inputUrl.addEventListener("input", (event) => onInput(event, inputs, "src"));
+
+inputTitle.addEventListener("change", () =>  onValid(inputs, "title", isValidText, errorTitle));
+inputAuthor.addEventListener("change", () =>  onValid(inputs, "author", isValidText, errorAuthor));
+inputUrl.addEventListener("change", () => onValid(inputs, "src", isValidHttpUrl, errorUrl));
+
 
 popupCreateCard.addEventListener('click', closePopupCreateCard);
 btnClose.addEventListener("click", closePopupCreateCard);
@@ -111,17 +179,3 @@ document.addEventListener('keyup', (event) => { closePopupByKeyEsc(event, closeP
 
 content.addEventListener('click', preventDefaults)
 btnSend.addEventListener("click", handleSubmit);
-
-
-
-
-
-
-// КАРТОЧКА 1 пустая размекта ====> inputs (данные) =====> запис между тегами инфу из input-ов =====> btnEdit.addEvent(openPopupEditCard ===> данные КАРТОЧКА 1)
-//                                                                                                .openPopupDeleteCard
-
-// КАРТОЧКА 2 пустая размекта ====> inputs (данные) =====> запис между тегами инфу из input-ов =====> btnEdit.addEvent(openPopupEditCard ===> данные КАРТОЧКА 2)
-//                                                                                                .openPopupDeleteCard
-
-// КАРТОЧКА 3 пустая размекта ====> inputs (данные) =====> запис между тегами инфу из input-ов =====> btnEdit.addEvent(openPopupEditCard ===> данные КАРТОЧКА 3)
-//                                                                                                .openPopupDeleteCard

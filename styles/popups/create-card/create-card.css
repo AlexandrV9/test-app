@@ -3,16 +3,11 @@
   margin-bottom: 25px;
 }
 
-.form-create-card .field-input label {
-  margin-left: 5px;
-}
-
 .popup-create-card input {
   width: 100%;
   padding: 10px;
   font-size: 14px;
   border: 1px solid black;
-  font-size: 20px;
   margin-top: 5px;
   text-overflow: ellipsis;
 }
@@ -20,16 +15,25 @@
 .popup-create-card #btn-send {
   width: 100%;
   padding: 10px 0;
-  margin-top: 60px;
+  margin-top: 40px;
   background: none;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 20px;
   font-size: 20px;
   transition: all .1s linear;
 }
 
-.popup-create-card #btn-send:hover {
+.popup-create-card #btn-send:disabled {
+  opacity: 0.2;
+}
+
+.popup-create-card #btn-send:hover:enabled {
+  cursor: pointer;
   background-color: black;
   color: white;
   cursor: pointer;
+}
+
+.popup-create-card #btn-send:hover:disabled {
+  cursor: not-allowed;
 }
