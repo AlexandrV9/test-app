@@ -38,7 +38,7 @@ export const getElementsNewCard = () => {
 
   const btnLike = elCard.querySelector('.btn-like');
   const btnDislike = elCard.querySelector('.btn-dislike');
-  const btnEdit = elCard.querySelector('.btn-edite');
+  const btnEdite = elCard.querySelector('.btn-edite');
   const btnDelete = elCard.querySelector('.btn-delete');
   const btnAddFavorites = elCard.querySelector('.btn-add-favorites');
   
@@ -52,7 +52,7 @@ export const getElementsNewCard = () => {
     elCountDislike,
     btnLike,
     btnDislike,
-    btnEdit,
+    btnEdite,
     btnDelete,
     btnAddFavorites
   }

@@ -1,5 +1,5 @@
 @import url('./create-card/create-card.css');
-@import url('./edit-card/edit-card.css');
+@import url('./edite-card/edite-card.css');
 @import url('./delete-card/delete-card.css');
 @import url('./drag-and-drop-img/drag-and-drop-img.css');
 
@@ -21,6 +21,7 @@
 .popup.active {
   opacity: 1;
   z-index: 2;
+  overflow: hidden;
 }
 
 .popup form .field-input {

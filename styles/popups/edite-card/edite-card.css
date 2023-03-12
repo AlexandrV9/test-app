@@ -1,13 +1,13 @@
-.form-edit-card .field-input {
+.form-edite-card .field-input {
   width: 100%;
   margin-bottom: 25px;
 }
 
-.form-edit-card .field-input label {
+.form-edite-card .field-input label {
   margin-left: 5px;
 }
 
-.popup-edit-card input {
+.popup-edite-card input {
   width: 100%;
   padding: 10px;
   font-size: 14px;
@@ -17,7 +17,7 @@
   text-overflow: ellipsis;
 }
 
-.popup-edit-card #btn-save {
+.popup-edite-card #btn-save {
   width: 100%;
   padding: 10px 0;
   margin-top: 60px;
@@ -28,7 +28,7 @@
   transition: all .1s linear;
 }
 
-.popup-edit-card #btn-send:hover {
+.popup-edite-card #btn-send:hover {
   background-color: black;
   color: white;
   cursor: pointer;

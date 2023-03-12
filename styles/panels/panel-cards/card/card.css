@@ -1,11 +1,7 @@
 .card {
   background-color: rgb(255, 255, 255);
-  display: grid;
-  grid-template-rows: 30px 10px repeat(11, 30px);
-  row-gap: 4px;
   max-width: 320px;
   width: 100%;
-  padding: 20px;
   border-radius: 20px;
 }
 
@@ -13,18 +9,17 @@
   display: flex;
   justify-content: end;
   align-items: center;
-  grid-row: 1/2;
+  padding:  15px 20px 10px;
+  border-bottom: 2px solid black;
 }
 
 .card-title {
   font-size: 26px;
   line-height: 36px;
-  grid-row: 3/4;
 }
 
 .card-author {
   font-size: 20px;
-  grid-row: 4/5;
 }
 
 .card-img {
@@ -33,7 +28,14 @@
   object-fit: cover;
   border: 1px solid black;
   height: 250px;
-  grid-row: 5/11;
+}
+
+.middle-card-panel {
+  display: grid;
+  grid-template-rows: 30px 30px 1fr;
+  row-gap: 5px;
+  margin: 10px 0 15px;
+  padding: 0 20px;
 }
 
 .bottom-card-panel {
@@ -43,6 +45,7 @@
   column-gap: 20px;
   align-items: center;
   grid-row: 13/14;
+  padding: 0 20px 15px;
 }
 
 .btn-card {
