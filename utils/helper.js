@@ -1,3 +1,5 @@
+import { listCards } from "./constants";
+
 export const getRandomId = () => {
   return Math.floor(Math.random() * Date.now()).toString(16);
 }
@@ -96,3 +98,7 @@ export const getFieldInputs = (inputs, field) => {
 export const onInput = (event, obj, key) => { 
   obj[key].value = event.target.value;
 };
+
+export const settingWidthGridTemplateColumnsListCards = () => {
+  listCards.style.gridTemplateColumns = `repeat(${Math.floor(listCards.offsetWidth / 300)}, 1fr)`
+}

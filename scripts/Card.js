@@ -1,5 +1,5 @@
-import PopupDeleteCard from './popups/PopupDeleteCard.js';
-import PopupEditeCard from './popups/PopupEditeCard.js';
+import PopupDeleteCard from './popups/delete-card/PopupDeleteCard.js';
+import PopupEditeCard from './popups/edite-card/PopupEditeCard.js';
 
 import { 
   getElementsNewCard
@@ -26,8 +26,8 @@ const inputsEditeCreateCard = [
   } 
 ]
 
-
 export default class Card {
+
   constructor({ title, author, src, likes = 0, dislikes = 0, date, resDate, id }) {
     this.title = title;
     this.author = author;
@@ -46,6 +46,12 @@ export default class Card {
 
   static #popupDeleteCard = new PopupDeleteCard(".popup-delete-card");
   static #popupEditeCard = new PopupEditeCard('.popup-edite-card');
+
+  static #order = 1;
+
+  static #increaseOrder = () => {
+    Card.#order += 1;
+  }
 
   static #initPopupEditeCard() {
 
@@ -69,7 +75,10 @@ export default class Card {
     this.elements.elAuthor.textContent = author;
     this.elements.elDate.textContent = resDate;
     this.elements.elImg.src = src;
-    this.elements.elCard.id = id;
+    this.elements.elCard.dataset.id = id;
+    
+    this.elements.elCard.dataset.order = Card.#order;
+    this.order = Card.#order;
 
     this.elements.btnLike.addEventListener('click', () => { this.like() })
     this.elements.btnDislike.addEventListener('click', () => { this.dislike() })
@@ -80,6 +89,8 @@ export default class Card {
     this.elements.btnEdite.addEventListener('click', () => {
       Card.#popupEditeCard.open({ id, elTitle: this.elements.elTitle, elImg: this.elements.elImg })
     })
+    
+    Card.#increaseOrder();
   }
 
   like() {
@@ -102,10 +113,7 @@ export default class Card {
       src: this.src,
       likes: this.likes,
       dislikes: this.dislikes,
+      order: this.order
     }
-  }
-
-  getElementCard(nameElement) {
-    return this.elements[nameElement]
   }
 }

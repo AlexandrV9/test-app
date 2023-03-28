@@ -16,14 +16,13 @@
   box-sizing: border-box;
 }
 
-html {
-  overflow-y: auto;
-  /* margin-left: calc((100vw - 100%));
-  margin-right: 0; */
+html.active {
+  overflow: hidden;
 }
 
-html.acive {
-  overflow-y: hidden;
+body { 
+  padding: 0 calc(15px - (100vw - 100%)) 0 0; 
+  background-color: rgb(40, 40, 40);;
 }
 
 li {

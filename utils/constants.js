@@ -1,3 +1,5 @@
+export const listCards = document.querySelector('.list-cards');
+
 export const cards = [];
 
 export const testCardsFromServer = [
@@ -7,7 +9,7 @@ export const testCardsFromServer = [
     id: "1",
     likes: 0,
     src: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    title: "test1",
+    title: "test12",
   },
   {
     author: "Nico",
@@ -15,7 +17,7 @@ export const testCardsFromServer = [
     id: "2",
     likes: 0,
     src: "https://images.unsplash.com/photo-1489824904134-891ab64532f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1931&q=80",
-    title: "test2",
+    title: "test231",
   },
   {
     author: "Qwert",
@@ -23,7 +25,7 @@ export const testCardsFromServer = [
     id: "1737df309b5",
     likes: 0,
     src: "https://images.unsplash.com/photo-1493238792000-8113da705763?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    title: "test3",
+    title: "test32",
   },
   {
     author: "Ben",
@@ -31,7 +33,7 @@ export const testCardsFromServer = [
     id: "3",
     likes: 0,
     src: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    title: "test4",
+    title: "test49",
   },
   {
     author: "Alis",
@@ -47,6 +49,6 @@ export const testCardsFromServer = [
     id: "5",
     likes: 0,
     src: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-    title: "test6",
+    title: "te09st6",
   },
 ];

@@ -57,6 +57,13 @@ export default class Popup {
     };
   }
 
+  validForm() {
+    Object.keys(this.inputs).forEach((name) => {
+      this.validationInput(this.inputs[name].value, name);
+    });
+    return !Object.values(this.inputs).map(({ valid }) => valid).includes(false);
+  }
+
   showErrMessage(valid, name) {
     if (!valid) {
       this.inputs[name].elErr.classList.add("active");

@@ -1,5 +1,5 @@
-import { cards } from "../../utils/constants.js";
-import Popup from "./Popup.js";
+import { cards } from "../../../utils/constants.js";
+import Popup from "../Popup.js";
 
 export default class PopupDeleteCard extends Popup {
   constructor(cls) {

@@ -1,12 +1,11 @@
-import { cards } from "../../utils/constants.js";
-import { getRandomId, handleGetCorrectDate } from '../../utils/helper.js';
-import Popup from "./Popup.js";
-import Card from "../Card.js";
+import { cards, listCards } from "../../../utils/constants.js";
+import { getRandomId, handleGetCorrectDate, settingWidthGridTemplateColumnsListCards } from '../../../utils/helper.js';
+import { inputsPopupCreateCard } from "./config.js";
 
-const listCards = document.querySelector('.list-cards');
-const handleAddNewCard = (card) => { listCards.prepend(card)}
+import Popup from "../Popup.js";
+import Card from "../../Card.js";
 
-export default class PopupCreateCard extends Popup {
+class PopupCreateCard extends Popup {
   constructor(cls) {
     super(cls);
     this.inputs = {};
@@ -33,22 +32,16 @@ export default class PopupCreateCard extends Popup {
     super.close();
   }
 
-  validForm() {
-    Object.keys(this.inputs).forEach((name) => {
-      this.validationInput(this.inputs[name].value, name);
-    });
-    return !Object.values(this.inputs).map(({ valid }) => valid).includes(false);
-  }
-
   onSubmit(event) {
     event.preventDefault();
     const valid = this.validForm();
     if(valid) {
       const newCard = this.сreateNewCard();
-      const elCard = newCard.getElementCard("elCard");
-      
-      cards.push(newCard.getDataCard());
-      handleAddNewCard(elCard);
+     
+      cards.push(newCard);
+      listCards.append(newCard.elements.elCard);
+      settingWidthGridTemplateColumnsListCards();
+
       this.close();
     }
   }
@@ -65,3 +58,12 @@ export default class PopupCreateCard extends Popup {
     })
   };
 }
+
+const popupCreateCard = new PopupCreateCard(".popup-create-card");
+
+inputsPopupCreateCard.forEach(input => { popupCreateCard.addElInput(input) });
+inputsPopupCreateCard.forEach(input => { popupCreateCard.addInputListener(input) });
+inputsPopupCreateCard.forEach(input => { popupCreateCard.addChangeListener(input) });
+
+
+export default popupCreateCard;

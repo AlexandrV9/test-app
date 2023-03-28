@@ -21,7 +21,7 @@
                type="text" 
                id="form-search-input"
             />
-            <button class="form-search-btn">
+            <button class="btn-search">
                <img 
                   src="<%=require('../assets/icons/search.svg')%>" alt="icon-search"
                >
@@ -77,10 +77,12 @@
             <div class="field-input">
                <label for="title">Title</label>
                <input type="text" id="title" />
+               <span class="error error-title"></span>
             </div>
             <div class="field-input">
                <label for="urlImg">Url img</label>
                <input type="url" id="urlImg" />
+               <span class="error error-urlImg"></span>
             </div>
             <button id="btn-save" type="submit">Изменить</button>
             <button id="btn-close" type="button">
