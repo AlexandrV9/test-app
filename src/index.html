@@ -10,35 +10,37 @@
 </head>
 <body>
    <div class="app">
-      <div class="panel-title">
-         <h1>#TestApp#</h1>
-      </div>
-      <div class="panel-filter"></div>
-      <div class="panel-search">
-         <div class="content">
-            <form class="form-search">
-            <input 
-               type="text" 
-               id="form-search-input"
-            />
-            <button class="btn-search">
-               <img 
-                  src="<%=require('../assets/icons/search.svg')%>" alt="icon-search"
-               >
-            </button>
-         </form>
-
-         <button class="btn-add-new-card">Создать новую карточку</button>
+      <header>
+         <div class="panel-title">
+            <h1>#TestApp#</h1>
          </div>
-         
-
-      </div>
-
-      <div class="panel-cards">
-         <ul class="list-cards">
+         <div class="panel-search">
+            <div class="content">
+               <form class="form-search">
+               <input 
+                  type="text" 
+                  id="form-search-input"
+               />
+               <button class="btn-search">
+                  <img 
+                     src="<%=require('../assets/icons/search.svg')%>" alt="icon-search"
+                  >
+               </button>
+            </form>
+   
+            <button class="btn-add-new-card">Создать новую карточку</button>
+            </div>
             
-         </ul>
-      </div>
+   
+         </div>
+      </header>
+
+      <main>
+         <div class="panel-filter"></div>
+         <div class="panel-cards">
+            <ul class="list-cards"></ul>
+         </div>
+      </main>
    </div>
 
 

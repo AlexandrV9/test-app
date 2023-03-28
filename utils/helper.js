@@ -100,5 +100,5 @@ export const onInput = (event, obj, key) => {
 };
 
 export const settingWidthGridTemplateColumnsListCards = () => {
-  listCards.style.gridTemplateColumns = `repeat(${Math.floor(listCards.offsetWidth / 300)}, 1fr)`
+  listCards.style.gridTemplateColumns = `repeat(${Math.floor((listCards.offsetWidth - 60) / 300) }, 1fr)`
 }

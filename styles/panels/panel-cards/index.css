@@ -7,7 +7,7 @@
   /* grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); */
   /* grid-template-columns: repeat(2, minmax(min-content, 500px)); */
   grid-auto-rows: minmax(min-content, 300px);
-  gap: 30px;
+  gap: 20px;
 }
 
 @media screen and (min-width: 2000px) {
