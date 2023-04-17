@@ -1,6 +1,7 @@
 @import url('./panels/panel-cards/index.css');
 @import url('./panels/panel-search/index.css');
 @import url('./panels/panel-title/index.css');
+@import url('./panels/panel-pagination/index.css');
 
 @import url('./popups/index.css');
 
@@ -52,8 +53,8 @@ main {
 }
 
 main {
-  padding-top: 150px;
   background-color: rgb(40, 40, 40);
+  padding: 150px 0 100px 0;
 }
 
 .panel-title {

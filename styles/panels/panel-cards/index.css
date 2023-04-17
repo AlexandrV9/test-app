@@ -10,6 +10,79 @@
   gap: 20px;
 }
 
+/* .panel-pagination-list-cards {
+  width: 100%;
+  background-color: rgb(239, 109, 22);
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 40px auto 40px;
+  align-items: center;
+  column-gap: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 15px 0;
+}
+
+.panel-pagination-list-cards .btn-prev,
+.panel-pagination-list-cards .btn-next {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .1s linear;
+}
+
+.panel-pagination-list-cards .btn-prev img,
+.panel-pagination-list-cards .btn-next img {
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+}
+
+.panel-pagination-list-cards .btn-next:hover,
+.panel-pagination-list-cards .btn-prev:hover {
+  transform: scale(.9);
+  opacity: .5;
+}
+
+.panel-pagination-list-cards ul {
+  display: flex;
+
+}
+
+.panel-pagination-list-cards li  {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all .1s linear;
+  user-select: none;
+}
+
+.panel-pagination-list-cards li:not(:last-of-type) {
+  margin-right: 10px;
+}
+
+.panel-pagination-list-cards li:not(.active):hover {
+  transform: scale(.9);
+  opacity: .5;
+}
+
+.panel-pagination-list-cards li.active {
+  background-color: rgb(40, 40, 40);
+  color: white;
+} */
+
 @media screen and (min-width: 2000px) {
   .list-cards {
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));

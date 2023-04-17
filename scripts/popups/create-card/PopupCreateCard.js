@@ -18,7 +18,8 @@ class PopupCreateCard extends Popup {
     this.btnSubmit.addEventListener("click", (event) => { this.onSubmit(event) });
   }
 
-  open() {
+  open(availableActions) {
+    this.availableActions = availableActions;
     super.open();
     this.inputs["title"].elInp.focus();
   }
@@ -34,12 +35,15 @@ class PopupCreateCard extends Popup {
 
   onSubmit(event) {
     event.preventDefault();
+    const { updatePages } = this.availableActions;
     const valid = this.validForm();
     if(valid) {
       const newCard = this.сreateNewCard();
      
       cards.push(newCard);
       listCards.append(newCard.elements.elCard);
+
+      updatePages(cards);
       settingWidthGridTemplateColumnsListCards();
 
       this.close();
@@ -55,6 +59,7 @@ class PopupCreateCard extends Popup {
       title: this.inputs["title"].value,
       author: this.inputs["author"].value,
       src: this.inputs["src"].value,
+      availableActions: this.availableActions,
     })
   };
 }

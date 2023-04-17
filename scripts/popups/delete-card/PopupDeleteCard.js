@@ -16,17 +16,20 @@ export default class PopupDeleteCard extends Popup {
     this.btnCancel.addEventListener("click", () => { this.close() });
   }
 
-  open({ id, elCard }){
+  open({ id, elCard, availableActions }){
     super.open();
     this.currentCard = { id, elCard }
+    this.availableActions = availableActions;
   }
 
   onSubmit(event) {
     event.preventDefault();
+    const { updatePages } = this.availableActions;
     const index = cards.findIndex(card => card.id === this.currentCard.id);
     if(index !== -1) {
       cards.splice(index, 1);
       this.currentCard.elCard.remove();
+      updatePages(cards)
     } else {
       console.log("В массиве данной карточки нет!")
     }

@@ -3,7 +3,8 @@ import { cards } from "../../utils/constants";
 const listCards = document.querySelector('.list-cards');
 
 class PanelSearch {
-  constructor() {
+  constructor({ availableActions }) {
+    this.availableActions = availableActions;
     this.panel = document.querySelector('.panel-search');
     this.btnSearch = document.querySelector('.btn-search');
     this.inputSearch = document.querySelector('#form-search-input');
@@ -104,6 +105,4 @@ class PanelSearch {
   }
 }
 
-const panelSearch = new PanelSearch();
-
-export default panelSearch;
+export default PanelSearch;

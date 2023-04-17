@@ -14,8 +14,9 @@ export default class PopupEditeCard extends Popup {
     this.btnSubmit.addEventListener("click", (event) => { this.onSubmit(event) });
   }
 
-  open({ id, elTitle, elImg }) {
+  open({ id, elTitle, elImg, availableActions }) {
     super.open();
+    this.availableActions = availableActions;
     this.currentCard = { id, elTitle, elImg };
     this.inputs["title"].value = elTitle.textContent;
     this.inputs["src"].value = elImg.src;
@@ -29,9 +30,11 @@ export default class PopupEditeCard extends Popup {
   onSubmit(event) {
     event.preventDefault();
 
+    const { updatePages } = this.availableActions;
     const { elImg, elTitle, id } = this.currentCard;
 
     const valid = this.validForm();
+
     if(valid) {
       const card = cards.find(card => card.id === id);
 
@@ -40,6 +43,8 @@ export default class PopupEditeCard extends Popup {
       
       card.title = this.inputs["title"].value;
       card.src = this.inputs["src"].value;
+
+      updatePages(cards);
       
       this.close();
     }

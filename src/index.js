@@ -1,20 +1,12 @@
 import '../styles/root.css';
 
-import "../scripts/panels/PanelSearch";
-import "../scripts/panels/PanelCards";
+import PanelSearch from '../scripts/panels/PanelSearch';
+import PanelCards from "../scripts/panels/PanelCards";
+import PanelPaginationCards from "../scripts/panels/PanelPaginationCards";
+import Card from '../scripts/Card.js';
 
 import { cards, listCards, testCardsFromServer } from "../utils/constants.js";
 import { handleGetCorrectDate, settingWidthGridTemplateColumnsListCards } from '../utils/helper.js';
-
-import Card from '../scripts/Card.js';
-
-const testGetCardsFromServer = async () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(testCardsFromServer)
-    })
-  })
-}
 
 // function test() {
 //   fetch("http://localhost:8000/cards?owner_id=1")
@@ -38,20 +30,54 @@ const testGetCardsFromServer = async () => {
 // 7. Файлы картинок должны сохраняться на сервере и всё остальное тоже           (-)
 // 8. Создать учебный сервер, БД - MySQL                                          (-)
 
-
-const showCardsSendFromServer = async () => {
+const showCardsSendFromServer = async (availableActions) => {
+  const { updatePages } = availableActions;
   const [date, resDate] = handleGetCorrectDate();
   const data = await testGetCardsFromServer();
-  
+
   data.forEach((card) => { 
-    const newCard = new Card({ date, resDate, ...card });  
+    const newCard = new Card({ date, resDate, ...card, availableActions });  
     cards.push(newCard)
-    listCards.append(newCard.elements.elCard)
-  }) 
+    // listCards.append(newCard.elements.elCard)
+  })
+  updatePages(cards);
+  return cards;
+}
+const testGetCardsFromServer = async () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve([
+        ...testCardsFromServer, 
+        ...testCardsFromServer, 
+        ...testCardsFromServer,
+        ...testCardsFromServer,
+        ...testCardsFromServer,
+        ...testCardsFromServer,
+        ...testCardsFromServer,
+        ...testCardsFromServer,
+        ...testCardsFromServer,
+        ...testCardsFromServer,
+        ...testCardsFromServer,
+      ])
+    })
+  })
 }
 
-// test();
-settingWidthGridTemplateColumnsListCards();
-showCardsSendFromServer();
+async function main() {
+  settingWidthGridTemplateColumnsListCards();
+  window.addEventListener('resize', settingWidthGridTemplateColumnsListCards);
 
-window.addEventListener('resize', settingWidthGridTemplateColumnsListCards);
+  const { updatePages } = new PanelPaginationCards();
+
+  const availableActions = {
+    updatePages
+  }
+
+  new PanelCards({ availableActions });
+  new PanelSearch({ availableActions });
+
+  await showCardsSendFromServer(availableActions);
+
+}
+
+main();

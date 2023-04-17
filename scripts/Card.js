@@ -28,7 +28,7 @@ const inputsEditeCreateCard = [
 
 export default class Card {
 
-  constructor({ title, author, src, likes = 0, dislikes = 0, date, resDate, id }) {
+  constructor({ title, author, src, likes = 0, dislikes = 0, date, resDate, id, availableActions }) {
     this.title = title;
     this.author = author;
     this.src = src;
@@ -36,7 +36,8 @@ export default class Card {
     this.dislikes = dislikes;
     this.date = date;
     this.resDate = resDate;
-    this.id = id
+    this.id = id;
+    this.availableActions = availableActions;
     
     this.#init({ title, author, src, resDate, id });
 
@@ -84,10 +85,10 @@ export default class Card {
     this.elements.btnDislike.addEventListener('click', () => { this.dislike() })
 
     this.elements.btnDelete.addEventListener('click', () => { 
-      Card.#popupDeleteCard.open({ id, elCard: this.elements.elCard })
+      Card.#popupDeleteCard.open({ id, elCard: this.elements.elCard, availableActions: this.availableActions })
     })
     this.elements.btnEdite.addEventListener('click', () => {
-      Card.#popupEditeCard.open({ id, elTitle: this.elements.elTitle, elImg: this.elements.elImg })
+      Card.#popupEditeCard.open({ id, elTitle: this.elements.elTitle, elImg: this.elements.elImg, availableActions: this.availableActions })
     })
     
     Card.#increaseOrder();

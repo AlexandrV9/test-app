@@ -1,17 +1,16 @@
 import popupCreateCard from '../popups/create-card/PopupCreateCard';
 
 class PanelCards {
-  constructor() {
+  constructor({ availableActions }) {
+    this.availableActions = availableActions;
     this.btnAddNewCard = document.querySelector('.btn-add-new-card');
 
     this.#init();
   }
 
   #init() {
-    this.btnAddNewCard.addEventListener('click', () => { popupCreateCard.open() });
+    this.btnAddNewCard.addEventListener('click', () => { popupCreateCard.open(this.availableActions) });
   }
 }
 
-const panelCards = new PanelCards();
-
-export default panelCards;
+export default PanelCards;
