@@ -1,11 +1,11 @@
-@import url('./panels/panel-cards/index.css');
-@import url('./panels/panel-search/index.css');
-@import url('./panels/panel-title/index.css');
-@import url('./panels/panel-pagination/index.css');
+@import url("./panels/panel-cards/index.css");
+@import url("./panels/panel-search/index.css");
+@import url("./panels/panel-title/index.css");
+@import url("./panels/panel-pagination/index.css");
 
-@import url('./popups/index.css');
+@import url("./popups/index.css");
 
-@import url('./fonts/index.css');
+@import url("./fonts/index.css");
 
 :root {
   --primary-width-btn: 30px;
@@ -21,8 +21,8 @@ html.active {
   overflow: hidden;
 }
 
-body { 
-  padding: 0 calc(15px - (100vw - 100%)) 0 0; 
+body {
+  padding: 0 calc(15px - (100vw - 100%)) 0 0;
   background-color: rgb(40, 40, 40);
 }
 
@@ -37,7 +37,6 @@ li {
   /* display: grid; */
   /* grid-template-columns: 300px repeat(2, 1fr);   */
   /* grid-template-rows: min-content auto; */
-  
 }
 
 header {

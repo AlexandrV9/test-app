@@ -21,10 +21,8 @@ module.exports = {
         type: 'asset/resource'
       },
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, {
-          loader: 'css-loader'
-        }],
+        test: /\.(sass|less|css)$/,
+        use: ['style-loader', 'css-loader', 'less-loader']
       },
     ],
   },
@@ -40,6 +38,5 @@ module.exports = {
       template: './src/index.html'
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin()
   ],
 };

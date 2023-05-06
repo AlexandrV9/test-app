@@ -27,7 +27,7 @@ export const isValidHttpUrl = (name, value) => {
   let url;
   if(!value) return {
     valid: false,
-    message: "Поле url не должно быть пустым"
+    message: "Загрузите картинку в поле слева или вставьте ссылку на неё из интернета"
   };
   try {
     url = new URL(value);

@@ -20,3 +20,8 @@ export const inputsPopupCreateCard = [
     funValid: isValidHttpUrl
   }
 ]
+
+// return {
+//   valid: true,
+//   message: ""
+// }

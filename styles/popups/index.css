@@ -43,10 +43,13 @@
   font-size: 12px;
 }
 
+.drop-area .upload-file {
+  display: flex; 
+  flex-direction: column;
+}
 
 
-
-
+/* 
 .popup .content {
   width: 100%;
   max-width: 350px;
@@ -57,11 +60,11 @@
   padding: 25px;
   position: relative;
   border-radius: 15px;
-}
+} */
 
 .popup h3 {
-  font-size: 25px;
-  padding-top: 50px;
+  font-size: 22px;
+  padding-top: 25px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
   margin-bottom: 30px;
