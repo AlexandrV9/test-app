@@ -21,11 +21,16 @@ module.exports = {
         type: 'asset/resource'
       },
       {
-        test: /\.(sass|less|css)$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader', 
+          'css-loader', 
+          'sass-loader'
+        ]
       },
     ],
   },
+
   devServer: {
     static: path.resolve(__dirname, './src/index.js'),
     hot: true,

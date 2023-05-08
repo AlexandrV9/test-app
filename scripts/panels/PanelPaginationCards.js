@@ -3,23 +3,25 @@ import { listCards } from "../../utils/constants.js";
 class PanelPaginationCards {
   constructor() {
 
-    // this.cards = cards;
-    this.panel = document.querySelector(".panel-pagination-list-cards");
-    this.containerPages = this.panel.querySelector('ul');
-    // this.numberСards = parseInt(cards.length);
     this.currentPage = 1;
-    this.btnPrev = this.panel.querySelector(".btn-prev");
-    this.btnNext = this.panel.querySelector(".btn-next");
-
     this.visibleCards = [];
 
-    // this.#init();
+    this.panel = document.querySelector(".panel_type_pagination-list-cards");
+    this.containerPages = this.panel.querySelector('ul');
+
+    this.btnPrev = this.panel.querySelector(".btn_type_prev");
+    this.btnNext = this.panel.querySelector(".btn_type_next");
   }
   
 
   #init() {
     this.numberСards = parseInt(this.cards.length);
     this.maxPages = Math.ceil(this.numberСards / 10);
+    
+    if(this.maxPages === 0) {
+      this.panel.style.display = "none";
+      return listCards.innerHTML = "";
+    };
 
     if(this.currentPage > this.maxPages) {
       this.currentPage =  this.maxPages;
@@ -27,7 +29,6 @@ class PanelPaginationCards {
 
     this.pages = this.handleShowPages();
     this.showMarkup();
-
     this.btnNext.addEventListener('click', this.handleClickNextButton);
     this.btnPrev.addEventListener('click', this.handleClickPrevButton);
   }
@@ -61,6 +62,13 @@ class PanelPaginationCards {
 
   handleShowPages = () => {
 
+
+    if(this.maxPages < 2) {
+      this.panel.style.display = "none";
+    } else {
+      this.panel.style.display = "flex";
+    }
+
     // Если число страниц меньше 5, то просто отображаем их.
     // 1. Формируем сначала пустой массив нужной длины ==> 4
     // 2. Преобразуем его к след. виду [1, 2, 3, 4]
@@ -83,6 +91,7 @@ class PanelPaginationCards {
     if (this.currentPage < 3) {
       return Array.from({ length: 5 }).map((_, index) => index + 1);
     }
+    
     // Обычное переключение
     return Array.from({ length: 5 }).map((_, index) => this.currentPage + index - 2);
   }

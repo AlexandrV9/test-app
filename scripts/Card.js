@@ -10,30 +10,22 @@ import {
   isValidHttpUrl
 } from './validation.js';
 
-
-const inputsEditeCreateCard = [
-  { 
-    name: "title", 
-    clsInp: "#title", 
-    clsErr: ".error-title",
-    funValid: isValidText
-  },
-  {
-    name: "src", 
-    clsInp: "#urlImg", 
-    clsErr: ".error-urlImg",
-    funValid: isValidHttpUrl
-  } 
-]
-
 export default class Card {
 
-  constructor({ title, author, src, likes = 0, dislikes = 0, date, resDate, id, availableActions }) {
+  constructor({ 
+    title, 
+    author, 
+    src, 
+    likes = 0, 
+    date, 
+    resDate, 
+    id, 
+    availableActions 
+  }) {
     this.title = title;
     this.author = author;
     this.src = src;
     this.likes = likes;
-    this.dislikes = dislikes;
     this.date = date;
     this.resDate = resDate;
     this.id = id;
@@ -41,12 +33,12 @@ export default class Card {
     
     this.#init({ title, author, src, resDate, id });
 
-    Card.#initPopupEditeCard();
+    // Card.#initPopupEditeCard();
     Card.#initPopupDeleteCard();
   }
 
-  static #popupDeleteCard = new PopupDeleteCard(".popup-delete-card");
-  static #popupEditeCard = new PopupEditeCard('.popup-edite-card');
+  static #popupDeleteCard = new PopupDeleteCard(".popup_type_delete-card");
+  static #popupEditeCard = new PopupEditeCard('.popup_type_edite-card');
 
   static #order = 1;
 
@@ -54,18 +46,7 @@ export default class Card {
     Card.#order += 1;
   }
 
-  static #initPopupEditeCard() {
-
-    inputsEditeCreateCard.forEach(input => { 
-      Card.#popupEditeCard.addElInput(input) 
-    })
-    inputsEditeCreateCard.forEach(({ name }) => { 
-      Card.#popupEditeCard.addInputListener({ name }) 
-    })
-    inputsEditeCreateCard.forEach(({ name, funValid }) => { 
-      Card.#popupEditeCard.addChangeListener({ name, funValid })
-    })
-  }
+  static #initPopupEditeCard() {}
   static #initPopupDeleteCard() {}
   
   #init({ title, author, src, resDate, id }) {
@@ -81,8 +62,7 @@ export default class Card {
     this.elements.elCard.dataset.order = Card.#order;
     this.order = Card.#order;
 
-    this.elements.btnLike.addEventListener('click', () => { this.like() })
-    this.elements.btnDislike.addEventListener('click', () => { this.dislike() })
+    this.elements.btnLike.addEventListener('click', this.onLike)
 
     this.elements.btnDelete.addEventListener('click', () => { 
       Card.#popupDeleteCard.open({ id, elCard: this.elements.elCard, availableActions: this.availableActions })
@@ -94,16 +74,15 @@ export default class Card {
     Card.#increaseOrder();
   }
 
+  onLike = (e) => {
+    e.preventDefault();
+    this.like()
+  }
+
   like() {
     const newValue = this.likes + 1;
     this.likes = newValue;
     this.elements.elCountLike.textContent = newValue;
-  }
-
-  dislike() {
-    const newValue = this.dislikes + 1;
-    this.dislikes = newValue;
-    this.elements.elCountDislike.textContent = newValue;
   }
 
   getDataCard() {

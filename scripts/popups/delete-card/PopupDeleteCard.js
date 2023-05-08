@@ -5,16 +5,18 @@ export default class PopupDeleteCard extends Popup {
   constructor(cls) {
     super(cls);
     this.currentCard = {};
-    this.btnSubmit = this.popup.querySelector("#btn-delete");
-    this.btnCancel = this.popup.querySelector("#btn-cancel");
+    this.btnSubmit = this.popup.querySelector(".btn_type_delete");
+    this.btnCancel = this.popup.querySelector(".btn_type_cancel");
     this.#init();
   }
 
   #init() {
     super.init()
-    this.btnSubmit.addEventListener("click", (event) => { this.onSubmit(event) });
-    this.btnCancel.addEventListener("click", () => { this.close() });
+    this.btnSubmit.addEventListener("click", this.onSubmit);
+    this.btnCancel.addEventListener("click", this.onClose);
   }
+
+  onSubmit = (event) => this.handleSubmit(event)
 
   open({ id, elCard, availableActions }){
     super.open();
@@ -22,7 +24,7 @@ export default class PopupDeleteCard extends Popup {
     this.availableActions = availableActions;
   }
 
-  onSubmit(event) {
+  handleSubmit(event) {
     event.preventDefault();
     const { updatePages } = this.availableActions;
     const index = cards.findIndex(card => card.id === this.currentCard.id);

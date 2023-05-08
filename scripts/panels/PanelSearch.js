@@ -1,13 +1,11 @@
 import { cards } from "../../utils/constants";
 
-const listCards = document.querySelector('.list-cards');
-
 class PanelSearch {
   constructor({ availableActions }) {
     this.availableActions = availableActions;
-    this.panel = document.querySelector('.panel-search');
-    this.btnSearch = document.querySelector('.btn-search');
-    this.inputSearch = document.querySelector('#form-search-input');
+    this.panel = document.querySelector('.panel_type_search');
+    this.btnSearch = this.panel.querySelector('.btn_type_search');
+    this.inputSearch = this.panel.querySelector('form');
 
     this.inputs = {
       search: {
@@ -20,19 +18,23 @@ class PanelSearch {
   }
 
   #init() {
-    this.inputSearch.addEventListener('input', this.handleInputValue);
-    this.btnSearch.addEventListener('click', this.handleSearch);
+    this.inputSearch.addEventListener('input', this.onInput);
+    this.btnSearch.addEventListener('click', this.onSubmit);
   }
+
+  onInput = event => this.handleInputValue(event);
+  onSubmit = event => this.handleSearch2(event);
 
   handleInputValue = (event) => { 
     this.inputs.search.value = event.target.value
   }
 
   sortCardsInOrderDOM = (elCard, index) => {
-
+    
+    const listCards = document.querySelector(".panel_type_cards ul");
     // получаем текущий список карточек из разметки
-    const currentElListCardsInDOM = document.querySelectorAll(".card");
-  
+    const currentElListCardsInDOM = document.querySelectorAll(".panel_type_cards li");
+
     // если index превысил длину списка currentElListCardsInDOM,
     // то добавляем карточку в самый конец
     if(index >= currentElListCardsInDOM.length) {
@@ -57,10 +59,18 @@ class PanelSearch {
   }
 
   sortCardsDOM = (elCard) => {
-    const listCards = document.querySelector('.list-cards');
+    const listCards = this.panel.querySelector('ul');
     if(!listCards.querySelector(`li.card[data-id="${elCard.id}"]`)) {
       listCards.append(elCard.elements.elCard);
     }
+  }
+
+  handleSearch2 = (event) => {
+    event.preventDefault();
+    const { updatePages } = this.availableActions;
+    const regexp = new RegExp(this.inputs.search.value, "i");  
+    const filteredElCards = cards.filter(elCard => regexp.test(elCard.title));
+    updatePages(filteredElCards);
   }
 
   handleSearch = (event) => {
@@ -82,7 +92,7 @@ class PanelSearch {
     })
   
     // находим карточки, которые в данный момент показываются на странице
-    let currentElListCards = listCards.querySelectorAll('.card');
+    let currentElListCards = document.querySelectorAll('.panel_type_cards li');
   
     // удаляем из разметки не нужные карточки
     for(let currentElCard of currentElListCards.values()) {
@@ -96,10 +106,8 @@ class PanelSearch {
     filteredElCards.forEach(elCard => {
       // 1) Сортировка учитывающая порядок следования элементов
       this.sortCardsInOrderDOM(elCard, index);
-  
       // 2) Сортировка без учитывания порядка следования элементов
       // sortCardsDOM(elCard)
-  
       index = 0;
     })
   }

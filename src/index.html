@@ -8,46 +8,51 @@
   <link rel="shortcut icon" href="#">
   <link rel="icon" type="image/svg+xml" href="<%=require('../assets/icons/favicon.svg')%>" />
 </head>
-<body>
+
    <div class="app">
+      
       <header>
-         <div class="panel-title">
+
+         <div class="panel panel_type_title">
             <h1>#TestApp#</h1>
          </div>
-         <div class="panel-search">
+
+         <div class="panel panel_type_search">
             <div class="content">
-               <form class="form-search">
-               <input 
-                  type="text" 
-                  id="form-search-input"
-               />
-               <button class="btn-search">
-                  <img 
-                     src="<%=require('../assets/icons/search.svg')%>" alt="icon-search"
-                  >
-               </button>
-            </form>
-   
-            <button class="btn-add-new-card">Создать новую карточку</button>
+               <form>
+                  <input type="text" id="search"/>
+                  <button class="btn btn_type_search">
+                     <img 
+                        src="<%=require('../assets/icons/search.svg')%>" 
+                        alt="icon-search"
+                     >
+                  </button>
+               </form>
+               <button class="btn btn_type_add-new-card">Создать новую карточку</button>
             </div>
-            
-   
          </div>
+
       </header>
 
       <main>
-         <!-- <div class="panel-filter"></div> -->
-         <div class="panel-cards">
-            <ul class="list-cards"></ul>
+
+         <div class="panel panel_type_cards">
+            <ul></ul>
          </div>
          
-         <div class="panel-pagination-list-cards">
-            <button class="btn btn-prev">
-               <img src="<%=require('../assets/icons/arrow-back.svg')%>" alt="arrow-back"/>
+         <div class="panel panel_type_pagination-list-cards">
+            <button class="btn btn_type_prev">
+               <img 
+                  src="<%=require('../assets/icons/arrow-back.svg')%>" 
+                  alt="icon-arrow-back"
+               />
             </button>
             <ul></ul>
-            <button class="btn btn-next">
-               <img src="<%=require('../assets/icons/arrow-forward.svg')%>"  alt="arrow-forward"/>
+            <button class="btn btn_type_next">
+               <img 
+                  src="<%=require('../assets/icons/arrow-forward.svg')%>"  
+                  alt="icon-arrow-forward"
+               />
             </button>
          </div>
 
@@ -55,29 +60,24 @@
    </div>
 
 
-   <div class="popup popup-create-card">
+   <div class="popup popup_type_create-card">
       <div class="content">
-         <form class="form form-create-card">
+         <form>
+
             <h3>Создать новую карточку</h3>
             <div class="box">
 
-
-
-
-
-
-
-
-
                <div class="left-box">
-                  <div class="field-input upload-file">
+                  <div class="field field_type_upload-file">
                      <div class="drop-area">
-                        <img src="<%=require('../assets/icons/download.svg')%>" class="drop-area-img"/>
+                        <img 
+                           src="<%=require('../assets/icons/download.svg')%>" 
+                           class="icon-drop-area"
+                           alt="icon-drop-area"
+                        />
                         <input type="file" id="uploadFile" accept="image/*"/>
                      </div>
-                     <button class="label-upload-file">
-                        Upload
-                     </button>
+                     <button class="btn btn_type_upload-file">Upload</button>
                      <div class="description">
                         <p>Для загрузки картинки выполните одно из следующих действий:</p>
                         <ul>
@@ -89,123 +89,185 @@
                   </div>
                </div>
 
-
-
-
-
-
-
-
                <div class="right-box">
-                  <div class="field-input">
+                  <div class="field">
                      <label for="title">Title</label>
                      <input type="text" id="title" placeholder="Введите название карточки"/>
-                     <span class="error error-title"></span>
+                     <span class="error error_type_title"></span>
                   </div>
-                 <div class="field-input">
+                  <div class="field">
                      <label for="author">Author</label>
                      <input type="text" id="author" placeholder="Введите автора карточки"/>
-                     <span class="error error-author"></span>
-                 </div>
-                 <div class="field-input url-img">
-                  <label for="urlImg">Url img</label>
-                  <input type="url" id="urlImg" placeholder="Введите url картинки"/>
-                  <span class="error error-urlImg"></span>
-              </div>
-                  <button id="btn-send" type="submit">
+                     <span class="error error_type_author"></span>
+                  </div>
+                  <div class="field field_type_src-img">
+                     <label for="srcImg">URL Img</label>
+                     <input 
+                        id="srcImg"
+                        type="url"
+                        placeholder="Введите url картинки"
+                     />
+                     <span class="error error_type_srcImg"></span>
+                  </div>
+                  
+                  <button 
+                     class="btn btn_type_add-new-card" 
+                     type="submit"
+                  >
                      Создать
                   </button>
                </div>
             </div>
 
-            <button id="btn-close" type="button">
-             <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
-             </button>
-          </form>
+            <button class="btn btn_type_close" type="button">
+               <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
+            </button>
+
+         </form>
       </div>
    </div>
-
-
-
-   <div class="popup popup-edite-card">
+   
+   <div class="popup popup_type_edite-card">
       <div class="content">
-         <form class="form form-edite-card">
+         <form>
             <h3>Введите новые данные</h3>
-            <div class="field-input">
-               <label for="title">Title</label>
-               <input type="text" id="title" />
-               <span class="error error-title"></span>
+            <div class="box">
+
+               <div class="left-box">
+                  <div class="field field_type_upload-file">
+                     <div class="drop-area">
+                        <img 
+                           src="<%=require('../assets/icons/download.svg')%>" 
+                           class="icon-drop-area"
+                           alt="icon-drop-area"
+                        />
+                        <input type="file" id="uploadFile" accept="image/*"/>
+                     </div>
+                     <button class="btn btn_type_upload-file">Upload</button>
+                     <div class="description">
+                        <p>Для загрузки картинки выполните одно из следующих действий:</p>
+                        <ul>
+                           <li>1. Нажмите на кнопку "Upload"</li>
+                           <li>2. Перетащите картинку в квадрат с иконкой загрузки</li>
+                           <li>2. Вставьте ссылку на картинку из интернета</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="right-box">
+                  <div class="field">
+                     <label for="title">Title</label>
+                     <input type="text" id="title" placeholder="Введите название карточки"/>
+                     <span class="error error_type_title"></span>
+                  </div>
+                  <div class="field field_type_src-img">
+                     <label for="srcImg">URL Img</label>
+                     <input 
+                        id="srcImg"
+                        type="url"
+                        placeholder="Введите url картинки"
+                     />
+                     <span class="error error_type_srcImg"></span>
+                  </div>
+                  
+                  <button 
+                     class="btn btn_type_save" 
+                     type="submit"
+                  >
+                     Обновить
+                  </button>
+               </div>
             </div>
-            <div class="field-input">
-               <label for="urlImg">Url img</label>
-               <input type="url" id="urlImg" />
-               <span class="error error-urlImg"></span>
-            </div>
-            <button id="btn-save" type="submit">Изменить</button>
-            <button id="btn-close" type="button">
+            <button class="btn btn_type_close" type="button">
                <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
             </form>
       </div>
    </div>
-   <div class="popup popup-delete-card">
+
+   <div class="popup popup_type_delete-card">
       <div class="content">
          <h3>Вы точно хотите удалить эту карточку?</h3>
-         <button id="btn-delete">Удалить</button>
-         <button id="btn-cancel">Отмена</button>
-         <button id="btn-close" type="button">
+         <button class="btn btn_type_delete" type="submit">Удалить</button>
+         <button class="btn btn_type_cancel" type="button">Отмена</button>
+         <button class="btn btn_type_close" type="button">
             <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
          </button>
       </div>
    </div>
-   <div class="popup popup-drag-and-drop-img">
-      <div class="content">
-         <h3>Перетащите картинку</h3>
-         <form class="drop-area">
-            <p>Перетащите сюда файл картинки</p>
-            <span>или</span>
-            <input type="file" id="file"/>
-            <label for="file">выбрать картинку</label>
-         </form>
-         <button id="btn-close" type="button">
-            <img src="<%=require('../assets/icons/close.svg')%>" alt="icon-close">
-         </button>
-      </div>
-   </div>
-   
+
    <template id="tmpl-new-card">
-      <li class="card">
-         <div class="top-card-panel">
-            <button class="btn-card btn-delete">
-               <img src="<%=require('../assets/icons/trash.svg')%>" alt="icon-delete">
+      <li>
+         <div class="top">
+            <button class="btn btn_type_delete">
+               <img 
+                  src="<%=require('../assets/icons/trash.svg')%>" 
+                  alt="icon-delete"
+               >
             </button>
-            <button class="btn-card btn-edite">
-               <img src="<%=require('../assets/icons/pencil.svg')%>" alt="icon-editee">
+            <button class="btn btn_type_edite">
+               <img 
+                  src="<%=require('../assets/icons/pencil.svg')%>" 
+                  alt="icon-editee"
+               >
             </button>
-            <button class="btn-card btn-add-favorites">
-               <img src="<%=require('../assets/icons/favorites.svg')%>" alt="icon-add-favorites">
+            <button class="btn btn_type_add-favorites">
+               <img 
+                  src="<%=require('../assets/icons/favorites.svg')%>" 
+                  alt="icon-add-favorites"
+               >
             </button>
          </div>
-         <div class="middle-card-panel">
-            <h3 class="card-title"></h3>
-            <p class="card-author"></p>
-            <img class="card-img" src="" alt="">
+         <div class="middle">
+            <h3 class="title"></h3>
+            <p class="author"></p>
+            <img class="image" 
+               src="card-image" 
+               alt=""
+            >
          </div>
-         <div class="bottom-card-panel">
-            <div class="like">
-               <span class="value">0</span>
-               <button class="btn-card btn-like">
-                  <img src="<%=require('../assets/icons/like.svg')%>" alt="icon-like">
-               </button>
+         <div class="bottom">
+
+            <div class="box-control">
+               <div class="left">
+                  <button class="btn btn_type_like">
+                     <img 
+                        src="<%=require('../assets/icons/favorite.svg')%>" 
+                        alt="icon-like">
+                  </button>
+                  <button class="btn btn_type_comment">
+                     <img 
+                        src="<%=require('../assets/icons/comment.svg')%>"
+                        alt="icon-comment"
+                     />
+                  </button>
+                  <button class="btn btn_type_share">
+                     <img
+                        src="<%=require('../assets/icons/share.svg')%>"
+                        alt="icon-share"
+                     />
+                  </button>
+               </div>
+   
+               <div class="right">
+                  <p class="date"></p>
+               </div>
+   
             </div>
-            <div class="dislike">
-               <span class="value">0</span>
-               <button class="btn-card btn-dislike">
-                  <img src="<%=require('../assets/icons/dislike.svg')%>" alt="icon-dislike">
-               </button>
+            
+            <div class="description"> 
+               <p class="likes">
+                  <span class="value">0</span>
+                  likes
+               </p>
             </div>
-            <p class="card-txt-date"></p>
          </div>
+
+
+
+
        </li>
    </template>
+
 </body>
 </html>
