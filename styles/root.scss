@@ -7,10 +7,10 @@
 
 html {
   font-family: 'Montserrat', sans-serif;
+  overflow: visible;
 
   .action_popup-open {
     padding-right: calc(15px - (100vw - 100%));
-    overflow: hidden;
   }
 
   body {

@@ -77,13 +77,13 @@ export default class PopupEditeCard extends PopupWithInputs {
     this.clearInput("title", 1, 1, 1);
     this.clearInput("src", 1, 1, 1);
     this.clearInput("fileImg", 1, 0, 0);
+    PopupEditeCard.DragAndDrop.clear();
+
     super.close();
   }
 
   validForm() {
     let valid = true;
-
-    console.log(this.getInputValue("title"))
 
     if (!this.getInputValue("title")) {
       this.setInputErrorValueDOM("title", "Поле title обязательно");

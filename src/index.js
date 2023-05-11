@@ -38,7 +38,6 @@ const showCardsSendFromServer = async (availableActions) => {
   data.forEach((card) => { 
     const newCard = new Card({ date, resDate, ...card, availableActions });  
     cards.push(newCard)
-    // listCards.append(newCard.elements.elCard)
   })
   updatePages(cards);
   return cards;
@@ -47,19 +46,7 @@ const showCardsSendFromServer = async (availableActions) => {
 const testGetCardsFromServer = async () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve([
-        ...testCardsFromServer, 
-        // ...testCardsFromServer, 
-        // ...testCardsFromServer,
-        // ...testCardsFromServer,
-        // ...testCardsFromServer,
-        // ...testCardsFromServer,
-        // ...testCardsFromServer,
-        // ...testCardsFromServer,
-        // ...testCardsFromServer,
-        // ...testCardsFromServer,
-        // ...testCardsFromServer,
-      ])
+      resolve(testCardsFromServer)
     })
   })
 }

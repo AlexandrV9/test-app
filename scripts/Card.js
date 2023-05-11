@@ -5,11 +5,6 @@ import {
   getElementsNewCard
 } from '../utils/helper.js';
 
-import {
-  isValidText,
-  isValidHttpUrl
-} from './validation.js';
-
 export default class Card {
 
   constructor({ 
@@ -33,7 +28,7 @@ export default class Card {
     
     this.#init({ title, author, src, resDate, id });
 
-    // Card.#initPopupEditeCard();
+    Card.#initPopupEditeCard();
     Card.#initPopupDeleteCard();
   }
 

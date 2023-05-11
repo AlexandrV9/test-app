@@ -76,9 +76,7 @@ class DragAndDrop {
   handleClickBtnClearInput = (e) => {
     this.preventDefaults(e);
     if (this.imageDownload) {
-      this.replaceChildInDropArea(this.iconDownload, this.imageDownload)
-      this.file = null;
-      this.changeBtnOnUpload();
+      this.clear();
     }
   };
 
@@ -121,6 +119,15 @@ class DragAndDrop {
   preventDefaults(e) {
     e.preventDefault();
     e.stopPropagation();
+  }
+
+  clear = () => {
+    if(this.dropArea.querySelector(".image") !== null) {
+      this.replaceChildInDropArea(this.iconDownload, this.imageDownload)
+    }
+    this.file = null;
+    this.srcImg = "";
+    this.changeBtnOnUpload();
   }
 
   showImageInDOM = (src) => {
