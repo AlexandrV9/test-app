@@ -1,74 +1,63 @@
 export default class Popup {
   constructor(cls) {
-    this.inputs = {}
+    this.clsPopup = cls;
     this.isOpen = false;
     this.popup = document.querySelector(`${cls}`);
-    this.content = this.popup.querySelector(".content");
-    this.btnClose = this.popup.querySelector("#btn-close");
+    this.content = this.getElementFromPopupDOM(".content");
+    this.btnClose = this.getElementFromPopupDOM(".btn_type_close");
   }
 
   init() {
-    this.btnClose.addEventListener("click", () => { this.close() });
-    document.addEventListener('keyup', (event) => {
-      if(event.key === "Escape" && this.isOpen) {
-        this.close();
-      }
-    });
+    this.btnClose.addEventListener("click", this.onClose);
+    document.addEventListener("keyup", this.onCloseByKey);
   }
+
+  onClose = (event) => this.close(event);
+  onCloseByKey = (event) => this.handleCloseByKey(event);
+
+  handleCloseByKey = (event) => {
+    if (event.key === "Escape" && this.isOpen) this.close();
+  };
 
   open() {
     this.isOpen = true;
-    document.body.style.overflow = "hidden";
-    this.popup.classList.add('active');
+    this.setClassElementDOM(this.clsPopup, "active");
+    this.enabledWindowVerticallScroll();
   }
 
   close() {
     this.isOpen = false;
-    document.body.style.overflow = "auto";
-    this.popup.classList.remove('active');
+    this.removeClassElementDOM(this.clsPopup, "active");
+    this.enabledWindowVerticallScroll();
   }
 
-  addInputListener({ name }) {
-    this.inputs[name].elInp.addEventListener("input", (event) => {
-      this.inputs[name].value = event.target.value;
-    });
-  }
+  disabledWindowVerticallScroll = () => {
+    this.setClassElementDOM("body", "action_popup-open");
+    this.setClassElementDOM("header", "action_popup-open");
+    this.setClassElementDOM(
+      ".panel_type_pagination-list-cards",
+      "action_popup-open"
+    );
+    this.setClassElementDOM("header", "action_popup-open");
+  };
 
-  validationInput(value, name) {
-    const { valid, message } = this.inputs[name].funValid(name, value);
-    this.inputs[name].elErr.textContent = message;
-    this.inputs[name].valid = valid;
-    this.showErrMessage(valid, name);
-  }
-
-  addChangeListener({ name }) {
-    this.inputs[name].elInp.addEventListener("change", (event) => {
-      this.validationInput(event.target.value, name);
-    });
-  }
-  
-  addElInput({ name, clsInp, clsErr, funValid }) {
-    this.inputs[name] = {
-      value: "",
-      valid: false,
-      elInp: this.popup.querySelector(`${clsInp}`),
-      elErr: this.popup.querySelector(`${clsErr}`),
-      funValid: funValid
-    };
-  }
-
-  validForm() {
-    Object.keys(this.inputs).forEach((name) => {
-      this.validationInput(this.inputs[name].value, name);
-    });
-    return !Object.values(this.inputs).map(({ valid }) => valid).includes(false);
-  }
-
-  showErrMessage(valid, name) {
-    if (!valid) {
-      this.inputs[name].elErr.classList.add("active");
-    } else {
-      this.inputs[name].elErr.classList.remove("active");
+  enabledWindowVerticallScroll = () => {
+    if (this.hasWindowVerticallScroll()) {
+      this.removeClassElementDOM("body", "action_popup-open");
+      this.removeClassElementDOM("header", "action_popup-open");
+      this.removeClassElementDOM(
+        ".panel_type_pagination-list-cards",
+        "action_popup-open"
+      );
+      this.removeClassElementDOM("header", "action_popup-open");
     }
-  }
+  };
+
+  hasWindowVerticallScroll = () =>
+    window.innerWidth !== document.documentElement.clientWidthl;
+  getElementFromPopupDOM = (cls) => this.popup.querySelector(cls);
+  setClassElementDOM = (selector, cls) =>
+    document.querySelector(selector).classList.add(cls);
+  removeClassElementDOM = (selector, cls) =>
+    document.querySelector(selector).classList.remove(cls);
 }

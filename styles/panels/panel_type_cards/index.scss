@@ -1,0 +1,118 @@
+.panel_type_cards {
+  padding: 20px;
+  & ul {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-auto-rows: minmax(min-content, 300px);
+    gap: 20px;
+
+    & li {
+      background-color: rgb(255, 255, 255);
+      max-width: 340px;
+      width: 100%;
+      border-radius: 20px;
+      margin: 0 auto;
+
+      .top {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        padding: 15px 20px 10px;
+        border-bottom: 2px solid black;
+
+        .btn {
+          width: 30px;
+          height: 30px;
+        }
+
+        .btn:not(:last-of-type) {
+          margin-right: 10px;
+        }
+      }
+
+      .middle {
+        display: grid;
+        grid-template-rows: 30px 30px 1fr;
+        row-gap: 5px;
+        margin: 10px 0 15px;
+        padding: 0 20px;
+
+        .title {
+          font-size: 26px;
+          line-height: 36px;
+        }
+
+        .author {
+          font-size: 20px;
+        }
+
+        .image {
+          width: 100%;
+          border-radius: 20px;
+          object-fit: cover;
+          border: 1px solid black;
+          height: 250px;
+        }
+      }
+
+      .bottom {
+
+        grid-row: 13/14;
+        padding: 0 20px 15px;
+
+        .left {
+          display: grid;
+          grid-template-columns: repeat(3, 30px);
+          column-gap: 10px;
+        }
+
+        .right {
+          .date {
+            font-size: 18px;
+          }
+        }
+
+        .btn {
+          width: 30px;
+          height: 30px;
+        }
+
+        .box-control {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+
+        .date {
+          text-align: right;
+          font-size: 20px;
+        }
+      }
+
+      .btn {
+        background: none;
+        border: none;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        transition: all 0.1s linear;
+        flex-shrink: 0;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+
+        & > img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    @media screen and (min-width: 2000px) {
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+  }
+}

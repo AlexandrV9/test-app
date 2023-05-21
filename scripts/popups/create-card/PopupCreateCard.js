@@ -1,148 +1,146 @@
 import { cards, listCards } from "../../../utils/constants.js";
-import { getRandomId, handleGetCorrectDate, settingWidthGridTemplateColumnsListCards } from '../../../utils/helper.js';
-import { inputsPopupCreateCard } from "./config.js";
+import {
+  getRandomId,
+  handleGetCorrectDate,
+  settingWidthGridTemplateColumnsListCards,
+} from "../../../utils/helper.js";
 
-import Popup from "../Popup.js";
 import Card from "../../Card.js";
-import DragAndDrop from "./DragAndDrop.js";
+import DragAndDrop from "../ui/DragAndDrop.js";
+import PopupWithInputs from "../PopupWithInputs.js";
 
-class PopupCreateCard extends Popup{
+class PopupCreateCard extends PopupWithInputs {
   constructor(cls) {
     super(cls);
     this.inputs = {
       title: {
         value: "",
-        elemInp: document.querySelector("#title"), 
-        elemErr: document.querySelector(".error-title"),
+        elInp: this.getElementFromPopupDOM("#title"),
+        elErr: this.getElementFromPopupDOM(".error_type_title"),
       },
       author: {
         value: "",
-        elemInp: document.querySelector("#author"), 
-        elemErr: document.querySelector(".error-author"),
+        elInp: this.getElementFromPopupDOM("#author"),
+        elErr: this.getElementFromPopupDOM(".error_type_author"),
       },
       src: {
         value: "",
-        elemInp: document.querySelector("#urlImg"), 
-        elemErr: document.querySelector(".error-urlImg"),
+        elInp: this.getElementFromPopupDOM("#srcImg"),
+        elErr: this.getElementFromPopupDOM(".error_type_srcImg"),
       },
       fileImg: {
         value: "",
-        clsInp: document.querySelector("#uploadFile"),
-      }
+        elInp: this.getElementFromPopupDOM("#uploadFile"),
+      },
     };
+    this.btnSubmit = this.getElementFromPopupDOM(".btn_type_add-new-card");
 
-    this.btnSubmit = this.popup.querySelector("#btn-send");
     this.init();
   }
 
-  static dragAndDrop = new DragAndDrop();
-
-  handleInput = (name, event) => {
-    this.inputs[name].value = event.target.value;
-  }
+  static DragAndDrop = new DragAndDrop();
 
   init() {
     super.init();
 
-    this.inputs.title.elemInp.addEventListener("input", (event) => this.handleInput("title", event));
-    this.inputs.author.elemInp.addEventListener("input", (event) => this.handleInput("author", event));
-    this.inputs.src.elemInp.addEventListener("input", (event) => this.handleInput("src", event));
+    this.inputs.title.elInp.addEventListener("input", this.onInputTitle);
+    this.inputs.author.elInp.addEventListener("input", this.onInputAuthor);
+    this.inputs.src.elInp.addEventListener("input", this.onInputSrc);
+    this.btnSubmit.addEventListener("click", this.onSubmit);
 
-    this.btnSubmit.addEventListener("click", (event) => { this.onSubmit(event) });
+    PopupCreateCard.DragAndDrop.init({ popup: this.popup });
   }
+
+  onInputTitle = (event) => this.handleInput(event, "title");
+  onInputAuthor = (event) => this.handleInput(event, "author");
+  onInputSrc = (event) => this.handleInput(event, "src");
+  onSubmit = (event) => this.handleSubmit(event);
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const valid = this.validForm();
+
+    if (valid) {
+      const newCard = this.сreateNewCard();
+      const { updatePages } = this.availableActions;
+
+      this.addNewCardInArrayCards(newCard);
+      this.addNewCardInDOM(newCard);
+      updatePages(cards);
+      settingWidthGridTemplateColumnsListCards();
+
+      PopupCreateCard.DragAndDrop.handleClickBtnClearInput(event);
+
+      this.close();
+    }
+  };
 
   open(availableActions) {
     super.open();
     this.availableActions = availableActions;
-    this.inputs.title.elemInp.focus();
+    this.setInputFocusDOM("title")
   }
 
   close() {
-    this.inputs.title.value = "";
-    this.inputs.title.elemInp.value = "";
-    this.inputs.title.elemErr.textContent = "";
-
-    this.inputs.author.value = "";
-    this.inputs.author.elemInp.value = "";
-    this.inputs.author.elemErr.textContent = "";
-
-    this.inputs.src.value = "";
-    this.inputs.src.elemInp.value = "";
-    this.inputs.src.elemErr.textContent = "";
-
-    this.inputs.fileImg.value = "";
-    this.inputs.src.elemInp.value = "";
-
+    this.clearInput("title", 1, 1, 1);
+    this.clearInput("author", 1, 1, 1);
+    this.clearInput("src", 1, 1, 1);
+    this.clearInput("fileImg", 1, 0, 0);
     super.close();
   }
 
   validForm() {
-
     let valid = true;
 
-
-    console.log(this.inputs.title.value)
-
-    if(!this.inputs.title.value) {
-      this.inputs.title.elemErr.textContent = "Поле title обязательно"
+    if (!this.getInputValue("title")) {
+      this.setInputErrorValueDOM("title", "Поле title обязательно");
       valid = false;
     } else {
-      this.inputs.title.elemErr.textContent = ""
+      this.setInputErrorValueDOM("title", "");
     }
 
-    if(!this.inputs.author.value) {
-      this.inputs.author.elemErr.textContent = "Поле author обязательно"
+    if (!this.inputs.author.value) {
+      this.setInputErrorValueDOM("author", "Поле author обязательно");
       valid = false;
     } else {
-      this.inputs.author.elemErr.textContent = ""
+      this.setInputErrorValueDOM("author", "");
     }
 
-    if(!this.inputs.src.value && !PopupCreateCard.dragAndDrop.file) {
-      this.inputs.src.elemErr.textContent = "Загрузите картинку в после слева или вставьте в ссылку на неё из интернета";
+    if(!this.getSrcImage()) {
+      this.setInputErrorValueDOM("src", "Загрузите картинку в после слева или вставьте в ссылку на неё из интернета");
       valid = false;
     } else {
-      this.inputs.src.elemErr.textContent = ""
+      this.setInputErrorValueDOM("src", "");
     }
 
-    return valid
-
-  }
-
-  onSubmit(event) {
-    event.preventDefault();
-    const { updatePages } = this.availableActions;
-    const valid = this.validForm();
-
-    if(valid) {
-      console.log(valid)
-      const newCard = this.сreateNewCard();
-     
-      cards.push(newCard);
-      listCards.append(newCard.elements.elCard);
-
-      updatePages(cards);
-      settingWidthGridTemplateColumnsListCards();
-
-      PopupCreateCard.dragAndDrop.handleClickBtnClearInput(event);
-
-      this.close();
-    }
+    return valid;
   }
 
   сreateNewCard = () => {
-    const [date, resDate] = handleGetCorrectDate();
+
+    const [ date, resDate ] = handleGetCorrectDate();
+
     return new Card({
-      id: getRandomId(),
       date,
       resDate,
-      title: this.inputs.title.value,
-      author: this.inputs.author.value,
-      src: this.inputs.src.value || PopupCreateCard.dragAndDrop.srcImg,
-      availableActions: this.availableActions,
-    })
+      id: getRandomId(),
+      title: this.getInputValue("title"),
+      author: this.getInputValue("author"),
+      src: this.getSrcImage(),
+      availableActions: this.getAvailableActions()
+    });
   };
+
+  getSrcImage = () => this.getInputValue("src") || PopupCreateCard.DragAndDrop.srcImg;
+
+  addNewCardInArrayCards = card => cards.push(card);
+
+  addNewCardInDOM = card => listCards.append(card.elements.elCard);
+
+  getAvailableActions = () => this.availableActions;
+
 }
 
-const popupCreateCard = new PopupCreateCard(".popup-create-card");
+const popupCreateCard = new PopupCreateCard(".popup_type_create-card");
 
 export default popupCreateCard;

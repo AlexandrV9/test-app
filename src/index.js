@@ -1,4 +1,4 @@
-import '../styles/root.css';
+import '../styles/root.scss';
 
 import PanelSearch from '../scripts/panels/PanelSearch';
 import PanelCards from "../scripts/panels/PanelCards";
@@ -38,34 +38,26 @@ const showCardsSendFromServer = async (availableActions) => {
   data.forEach((card) => { 
     const newCard = new Card({ date, resDate, ...card, availableActions });  
     cards.push(newCard)
-    // listCards.append(newCard.elements.elCard)
   })
   updatePages(cards);
   return cards;
 }
+
 const testGetCardsFromServer = async () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve([
-        ...testCardsFromServer, 
-        ...testCardsFromServer, 
-        ...testCardsFromServer,
-        ...testCardsFromServer,
-        ...testCardsFromServer,
-        ...testCardsFromServer,
-        ...testCardsFromServer,
-        ...testCardsFromServer,
-        ...testCardsFromServer,
-        ...testCardsFromServer,
-        ...testCardsFromServer,
-      ])
+      resolve(testCardsFromServer)
     })
   })
 }
 
+const setInitialListener = () => {
+  window.addEventListener('resize', settingWidthGridTemplateColumnsListCards);
+}
+
 async function main() {
   settingWidthGridTemplateColumnsListCards();
-  window.addEventListener('resize', settingWidthGridTemplateColumnsListCards);
+  setInitialListener();
 
   const { updatePages } = new PanelPaginationCards();
 

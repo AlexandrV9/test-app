@@ -1,0 +1,28 @@
+.popup_type_delete-card {
+  .content {
+    max-width: 400px;
+    & h3 {
+      font-size: 22px;
+      padding-top: 25px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .btn_type_delete, 
+    .btn_type_cancel {
+      width: 100%;
+      padding: 10px 0;
+      background: none;
+      border: 2px solid black;
+      border-radius: 20px;
+      font-size: 20px;
+      transition: all 0.1s linear;
+      margin-top: 20px;
+
+      &:hover {
+        background-color: black;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+}

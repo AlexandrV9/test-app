@@ -26,23 +26,22 @@ export const handleGetCorrectDate = () => {
   return [data, resDate]
 }
 export const getElementsNewCard = () => {
-  // const card = document.querySelector(`li.card[id="${id}"]`);
   const tmplNewCard = document.querySelector('#tmpl-new-card')
+
   const cloneContent = tmplNewCard.content.cloneNode(true);
-  const elCard = cloneContent.querySelector('.card');
-  const elTitle = elCard.querySelector('.card-title');
-  const elAuthor = elCard.querySelector('.card-author');
-  const elDate = elCard.querySelector('.card-txt-date');
-  const elImg = elCard.querySelector('.card-img');
 
-  const elCountLike = elCard.querySelector('.like .value');
+  const elCard = cloneContent.querySelector('li');
+  const elTitle = elCard.querySelector('.title');
+  const elAuthor = elCard.querySelector('.author');
+  const elDate = elCard.querySelector('.date');
+  const elImg = elCard.querySelector('.image');
+  const elCountLike = elCard.querySelector('.likes .value');
   const elCountDislike = elCard.querySelector('.dislike .value');
-
-  const btnLike = elCard.querySelector('.btn-like');
-  const btnDislike = elCard.querySelector('.btn-dislike');
-  const btnEdite = elCard.querySelector('.btn-edite');
-  const btnDelete = elCard.querySelector('.btn-delete');
-  const btnAddFavorites = elCard.querySelector('.btn-add-favorites');
+  
+  const btnLike = elCard.querySelector('.btn_type_like');
+  const btnEdite = elCard.querySelector('.btn_type_edite');
+  const btnDelete = elCard.querySelector('.btn_type_delete');
+  const btnAddFavorites = elCard.querySelector('.btn_type_add-favorites');
   
   return {
     elCard,
@@ -53,7 +52,6 @@ export const getElementsNewCard = () => {
     elCountLike,
     elCountDislike,
     btnLike,
-    btnDislike,
     btnEdite,
     btnDelete,
     btnAddFavorites
